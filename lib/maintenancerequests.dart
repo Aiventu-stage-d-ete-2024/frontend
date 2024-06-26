@@ -3,10 +3,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class MaintenanceRequestsTable extends StatefulWidget {
-  const MaintenanceRequestsTable({super.key});
+  const MaintenanceRequestsTable({Key? key}) : super(key: key);
 
   @override
-  _MaintenanceRequestsTableState createState() => _MaintenanceRequestsTableState();
+  _MaintenanceRequestsTableState createState() =>
+      _MaintenanceRequestsTableState();
 }
 
 class _MaintenanceRequestsTableState extends State<MaintenanceRequestsTable> {
@@ -71,15 +72,21 @@ class _MaintenanceRequestsTableState extends State<MaintenanceRequestsTable> {
                     DataCell(Text(request['ServiceLevel'].toString())),
                     DataCell(Text(request['FunctionalLocation'].toString())),
                     DataCell(Text(request['Asset'].toString())),
-                    DataCell(Text(request['AssetVerified'].toString())),
+                    DataCell(
+                      request['AssetVerified'] == true
+                          ? Icon(Icons.check)
+                          : SizedBox.shrink(),
+                    ),
                     DataCell(Text(request['JobType'].toString())),
                     DataCell(Text(request['JobVariant'].toString())),
                     DataCell(Text(request['JobTrade'].toString())),
                     DataCell(Text(request['ActualStart'].toString())),
                     DataCell(Text(request['StartedByWorker'].toString())),
-                    DataCell(Text(request['ResponsibleWorkerGroup'].toString())),
+                    DataCell(
+                        Text(request['ResponsibleWorkerGroup'].toString())),
                     DataCell(Text(request['ResponsibleWorker'].toString())),
-                    DataCell(Text(request['CurrentLifecycleState'].toString())),
+                    DataCell(
+                        Text(request['CurrentLifecycleState'].toString())),
                     DataCell(Text(request['NumberOfFaults'].toString())),
                   ],
                 );
