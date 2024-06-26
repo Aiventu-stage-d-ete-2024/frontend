@@ -30,7 +30,6 @@ class _AssetTableState extends State<AssetTable> {
         _isLoading = false;
       });
     } else {
-      // Handle the error
       setState(() {
         _isLoading = false;
       });
