@@ -9,7 +9,7 @@ class AssetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Assets'),
+        title: Text('Assets'),
       ),
       drawer: Drawer(
         child: ListView(
@@ -17,10 +17,10 @@ class AssetScreen extends StatelessWidget {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Color(0xFF041431),
               ),
               child: Text(
-                'Side Menu',
+                'Menu',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -59,10 +59,6 @@ class AssetScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'All assets',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
                   SizedBox(height: 16.0),
                   Row(
                     children: [

@@ -86,10 +86,10 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Color(0xFF041431),
               ),
               child: Text(
-                'Side Menu',
+                'Menu',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             ListTile(
-              title: Text('All Assets'),
+              title: Text('Assets'),
               onTap: () {
                 Navigator.pop(context); // Close the drawer
                 Navigator.pushReplacement(

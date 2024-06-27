@@ -18,10 +18,10 @@ class MaintenanceRequestsScreen extends StatelessWidget {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Color(0xFF041431),
               ),
               child: Text(
-                'Side Menu',
+                'Menu',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -39,7 +39,7 @@ class MaintenanceRequestsScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('All assets'),
+              title: Text('Assets'),
               onTap: () {
                 Navigator.pop(context); // Close the drawer
                 Navigator.pushReplacement(
@@ -60,10 +60,6 @@ class MaintenanceRequestsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'All maintenance requests',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
                   SizedBox(height: 16.0),
                   MaintenanceRequestsTable(), // Replace with your MaintenanceRequestsTable widget
                 ],
