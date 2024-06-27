@@ -151,6 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: const Icon(Icons.delete, color: Color(0xFF3665DB)),
             padding: EdgeInsets.zero,
           ),
+          const Spacer(),
           TextButton.icon(
             onPressed: () {},
             label: const Text(
@@ -161,12 +162,12 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: WidgetStateProperty.all(EdgeInsets.zero),
             ),
           ),
-          //const Spacer(),
-          IconButton(
+          const Spacer(),
+          /*IconButton(
             onPressed: () {},
             icon: const Icon(Icons.search, color: Color(0xFF3665DB)),
             padding: EdgeInsets.zero,
-          ),
+          ),*/
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.attachment, color: Color(0xFF3665DB)),
