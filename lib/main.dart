@@ -47,28 +47,27 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         actions: [
-          IconButton(
+          TextButton(
             onPressed: () {},
-            icon: const Icon(Icons.search),
-            color: Colors.white,
-          ),
+            child: const Text(
+        'USMF',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.notifications, color: Colors.white),
             padding: EdgeInsets.zero,
           ),
-          IconButton(
+         /* IconButton(
             onPressed: () {},
             icon: const Icon(Icons.settings),
             color: Colors.white,
             padding: EdgeInsets.zero,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.help),
-            color: Colors.white,
-            padding: EdgeInsets.zero,
-          ),
+          ),*/
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.supervised_user_circle_rounded, color: Colors.white),
@@ -89,27 +88,25 @@ class _MyHomePageState extends State<MyHomePage> {
         'All assets',
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
       ),
-      SizedBox(height: 8.0),
-      Text(
-        'Standard view',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-      ),
       SizedBox(height: 16.0),
       Row(
   children: [
     SizedBox(
-      width: 200, 
-      height: 40,
+      width: 200,
+      height: 30,
       child: TextField(
         textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           hintText: 'Filter',
+          prefixIcon: Icon(Icons.search),
+          contentPadding: EdgeInsets.symmetric(vertical: 10), // Adjust padding to align text and icon
         ),
       ),
     ),
   ],
 ),
+
       SizedBox(height: 16.0),
       AssetTable(),
       SizedBox(height: 16.0),
@@ -154,58 +151,22 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: const Icon(Icons.delete, color: Color(0xFF3665DB)),
             padding: EdgeInsets.zero,
           ),
-         /* TextButton.icon(
+          TextButton.icon(
             onPressed: () {},
             label: const Text(
-              'Asset',
+              'Counters',
               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
             ),
             style: ButtonStyle(
               padding: WidgetStateProperty.all(EdgeInsets.zero),
             ),
           ),
-          TextButton.icon(
-            onPressed: () {},
-            label: const Text(
-              'General',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-            ),
-            style: ButtonStyle(
-              padding: WidgetStateProperty.all(EdgeInsets.zero),
-            ),
-          ),
-          TextButton.icon(
-            onPressed: () {},
-            label: const Text(
-              'Options',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-            ),
-            style: ButtonStyle(
-              padding: WidgetStateProperty.all(EdgeInsets.zero),
-            ),
-          ),*/
-          const Spacer(),
+          //const Spacer(),
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.search, color: Color(0xFF3665DB)),
             padding: EdgeInsets.zero,
           ),
-          IconButton(
-                    onPressed: () {},
-                    icon: SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: Image.asset('assets/icons/powerapps.png'),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: Image.asset('assets/icons/microsoftoffice.png'),
-                    ),
-                  ),
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.attachment, color: Color(0xFF3665DB)),

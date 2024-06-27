@@ -47,30 +47,12 @@ class _AssetTableState extends State<AssetTable> {
               columns: const [
                 DataColumn(label: Text('Asset')),
                 DataColumn(label: Text('Name')),
-                DataColumn(label: Text('Parent')),
-                DataColumn(label: Text('Children')),
-                DataColumn(label: Text('Asset type')),
-                DataColumn(label: Text('Manufacturer')),
-                DataColumn(label: Text('Model')),
-                DataColumn(label: Text('Customer account')),
-                DataColumn(label: Text('Criticality')),
-                DataColumn(label: Text('Functional location')),
-                DataColumn(label: Text('Current lifecycle state')),
               ],
               rows: _assets.map<DataRow>((asset) {
                 return DataRow(
                   cells: [
                     DataCell(Text(asset['AssetID'].toString())),
                     DataCell(Text(asset['Name'].toString())),
-                    DataCell(Text(asset['Parent'].toString())),
-                    DataCell(Text(asset['NumberOfChildren'].toString())),
-                    DataCell(Text(asset['AssetType'].toString())),
-                    DataCell(Text(asset['Manufacturer'].toString())),
-                    DataCell(Text(asset['Model'].toString())),
-                    DataCell(Text(asset['CustomerAccount'].toString())),
-                    DataCell(Text(asset['Criticality'].toString())),
-                    DataCell(Text(asset['FunctionalLocation'].toString())),
-                    DataCell(Text(asset['CurrentLifecycleState'].toString())),
                   ],
                 );
               }).toList(),

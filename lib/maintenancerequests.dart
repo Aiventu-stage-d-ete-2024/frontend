@@ -48,46 +48,16 @@ class _MaintenanceRequestsTableState extends State<MaintenanceRequestsTable> {
               columns: const [
                 DataColumn(label: Text('Request ID')),
                 DataColumn(label: Text('Request Type')),
-                DataColumn(label: Text('Description')),
-                DataColumn(label: Text('Service Level')),
-                DataColumn(label: Text('Functional Location')),
                 DataColumn(label: Text('Asset')),
-                DataColumn(label: Text('Asset Verified')),
-                DataColumn(label: Text('Job Type')),
-                DataColumn(label: Text('Job Variant')),
-                DataColumn(label: Text('Job Trade')),
-                DataColumn(label: Text('Actual Start')),
-                DataColumn(label: Text('Started By Worker')),
-                DataColumn(label: Text('Responsible Worker Group')),
-                DataColumn(label: Text('Responsible Worker')),
-                DataColumn(label: Text('Current Lifecycle State')),
-                DataColumn(label: Text('Number Of Faults')),
+                DataColumn(label: Text('Description')),
               ],
               rows: _maintenanceRequests.map<DataRow>((request) {
                 return DataRow(
                   cells: [
                     DataCell(Text(request['RequestID'].toString())),
                     DataCell(Text(request['RequestType'].toString())),
-                    DataCell(Text(request['Description'].toString())),
-                    DataCell(Text(request['ServiceLevel'].toString())),
-                    DataCell(Text(request['FunctionalLocation'].toString())),
                     DataCell(Text(request['Asset'].toString())),
-                    DataCell(
-                      request['AssetVerified'] == true
-                          ? const Icon(Icons.check)
-                          : const SizedBox.shrink(),
-                    ),
-                    DataCell(Text(request['JobType'].toString())),
-                    DataCell(Text(request['JobVariant'].toString())),
-                    DataCell(Text(request['JobTrade'].toString())),
-                    DataCell(Text(request['ActualStart'].toString())),
-                    DataCell(Text(request['StartedByWorker'].toString())),
-                    DataCell(
-                        Text(request['ResponsibleWorkerGroup'].toString())),
-                    DataCell(Text(request['ResponsibleWorker'].toString())),
-                    DataCell(
-                        Text(request['CurrentLifecycleState'].toString())),
-                    DataCell(Text(request['NumberOfFaults'].toString())),
+                    DataCell(Text(request['Description'].toString())),
                   ],
                 );
               }).toList(),
