@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class MaintenanceRequestsTable extends StatefulWidget {
-  const MaintenanceRequestsTable({Key? key}) : super(key: key);
+  const MaintenanceRequestsTable({super.key});
 
   @override
   _MaintenanceRequestsTableState createState() =>
@@ -74,8 +74,8 @@ class _MaintenanceRequestsTableState extends State<MaintenanceRequestsTable> {
                     DataCell(Text(request['Asset'].toString())),
                     DataCell(
                       request['AssetVerified'] == true
-                          ? Icon(Icons.check)
-                          : SizedBox.shrink(),
+                          ? const Icon(Icons.check)
+                          : const SizedBox.shrink(),
                     ),
                     DataCell(Text(request['JobType'].toString())),
                     DataCell(Text(request['JobVariant'].toString())),
