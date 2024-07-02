@@ -11,7 +11,7 @@ class DrawerWidget extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           const SizedBox(
-            height: 98.0,
+            height: 105.0,
             child: DrawerHeader(
               decoration: BoxDecoration(
                 color: Color(0xFF041431),

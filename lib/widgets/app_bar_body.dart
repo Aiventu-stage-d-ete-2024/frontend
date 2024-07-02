@@ -33,11 +33,6 @@ Widget appBarBody(BuildContext context) {
           icon: const Icon(Icons.delete, color: Color(0xFF3665DB)),
           padding: EdgeInsets.zero,
         ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.add, color: Color(0xFF3665DB)),
-          padding: EdgeInsets.zero,
-        ),
         const Spacer(),
         TextButton.icon(
           onPressed: () {},
