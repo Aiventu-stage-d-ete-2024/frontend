@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import '../pages/home_page.dart';
 
-Widget appBarBody() {
+Widget appBarBody(BuildContext context) {
   return Container(
     color: Colors.white,
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Finance and Operations')),
+              (Route<dynamic> route) => false,
+            );
+          },
           icon: const Icon(Icons.arrow_back, color: Color(0xFF3665DB)),
           padding: EdgeInsets.zero,
         ),
@@ -26,10 +33,14 @@ Widget appBarBody() {
           icon: const Icon(Icons.delete, color: Color(0xFF3665DB)),
           padding: EdgeInsets.zero,
         ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.add, color: Color(0xFF3665DB)),
+          padding: EdgeInsets.zero,
+        ),
         const Spacer(),
         TextButton.icon(
           onPressed: () {},
-          icon: const Icon(Icons.add, color: Color(0xFF3665DB)),
           label: const Text(
             'Counters',
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
