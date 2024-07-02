@@ -9,18 +9,21 @@ class DrawerWidget extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          Container(
+          const SizedBox(
             height: 98.0,
             child: DrawerHeader(
               decoration: BoxDecoration(
                 color: Color(0xFF041431),
               ),
-              child: const Text(
-                'Menu',
-                style: TextStyle(color: Colors.white, fontSize: 24),
-              ),
               margin: EdgeInsets.all(0),
               padding: EdgeInsets.all(10.0),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white, 
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           ListTile(
