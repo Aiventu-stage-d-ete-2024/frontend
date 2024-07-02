@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'baseURL.dart';
+import '../../baseURL.dart';
 
 class AssetTable extends StatefulWidget {
   const AssetTable({super.key});
@@ -22,8 +22,8 @@ class _AssetTableState extends State<AssetTable> {
   }
 
   Future<void> _fetchAssets() async {
-final url = Uri.parse('${baseUrl}assets');    
-final response = await http.get(url);
+    final url = Uri.parse('${baseUrl}assets');
+    final response = await http.get(url);
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
