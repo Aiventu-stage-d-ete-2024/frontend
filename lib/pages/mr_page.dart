@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../widgets/main_app_bar.dart';
 import '../baseUrl.dart';
-import '../widgets/maintenancerequests.dart';
+import '../widgets/mr_table.dart';
 import '../widgets/drawer_widget.dart';
-import '../widgets/app_bar_body.dart';
+import '../widgets/mr_app_bar_body.dart';
 
 class MaintenancePage extends StatefulWidget {
   const MaintenancePage({super.key});
@@ -51,7 +51,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
       body: SingleChildScrollView(
               child: Column(
                 children: [
-                  appBarBody(context),
+                  mrAppBarBody(context),
                   const Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Column(

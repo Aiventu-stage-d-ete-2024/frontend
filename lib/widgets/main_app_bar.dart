@@ -15,7 +15,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           Scaffold.of(context).openDrawer();
         },
         child: const Text(
-          'Finance and Operations',
+          'Finance & Operations',
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,

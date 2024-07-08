@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../widgets/main_app_bar.dart';
 import '../baseUrl.dart';
-import '../widgets/assets.dart';
+import '../widgets/assets_table.dart';
 import '../widgets/drawer_widget.dart';
-import '../widgets/app_bar_body.dart';
+import '../widgets/asset_app_bar_body.dart';
 
 class AssetPage extends StatefulWidget {
   const AssetPage({super.key});
@@ -51,7 +51,7 @@ class _AssetPageState extends State<AssetPage> {
       body: SingleChildScrollView(
               child: Column(
                 children: [
-                  appBarBody(context),
+                  assetAppBarBody(context),
                   const Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Column(

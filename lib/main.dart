@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
 import 'pages/asset_page.dart';
-import 'pages/maintenance_page.dart';
+import 'pages/mr_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/assets': (context) => const AssetPage(),
         '/maintenancerequests': (context) => const MaintenancePage(),
-        '/home': (context) => const MyHomePage(title: 'Finance and Operations'),
+        '/home': (context) => const MyHomePage(title: 'Finance & Operations'),
       },
       debugShowCheckedModeBanner: false,
     );

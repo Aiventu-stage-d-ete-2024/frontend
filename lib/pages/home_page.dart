@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../widgets/main_app_bar.dart';
-import '../widgets/app_bar_body.dart';
 import '../widgets/drawer_widget.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -27,7 +26,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            appBarBody(context),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -59,6 +57,22 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPageChanged: (focusedDay) {
                       _focusedDay = focusedDay;
                     },
+                    calendarStyle: CalendarStyle(
+                      todayDecoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Color(0xFF3665DB), width: 2.0),
+                        shape: BoxShape.circle,
+                      ),
+                      selectedDecoration: BoxDecoration(
+                        color: Color(0xFF3665DB),
+                        shape: BoxShape.circle,
+                      ),
+                      selectedTextStyle: TextStyle(color: Colors.white),
+                      todayTextStyle: TextStyle(color: Color(0xFF3665DB)),
+                      weekendTextStyle: TextStyle(color: Color(0xFF3665DB)),
+                      outsideTextStyle: TextStyle(color: Colors.grey),
+                      outsideDaysVisible: false,
+                    ),
                   ),
                 ],
               ),

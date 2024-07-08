@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test/pages/Asset_form.dart';
 import '../pages/home_page.dart';
 
-Widget appBarBody(BuildContext context) {
+Widget assetAppBarBody(BuildContext context) {
   return Container(
     color: Colors.white,
     child: Row(
@@ -12,7 +12,7 @@ Widget appBarBody(BuildContext context) {
           onPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => const AssetForm()),
+              MaterialPageRoute(builder: (context) => const MyHomePage(title: "Finance & Operations",)),
               (Route<dynamic> route) => false,
             );
           },
@@ -25,7 +25,13 @@ Widget appBarBody(BuildContext context) {
           padding: EdgeInsets.zero,
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const AssetForm()),
+              (Route<dynamic> route) => false,
+            );
+          },
           icon: const Icon(Icons.add, color: Color(0xFF3665DB)),
           padding: EdgeInsets.zero,
         ),
