@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import '../baseURL.dart';
+import '../pages/mr_details.dart';
 
 class MaintenanceRequestsTable extends StatefulWidget {
-  const MaintenanceRequestsTable({super.key});
+  const MaintenanceRequestsTable({Key? key}) : super(key: key);
 
   @override
   _MaintenanceRequestsTableState createState() => _MaintenanceRequestsTableState();
@@ -55,14 +55,51 @@ class _MaintenanceRequestsTableState extends State<MaintenanceRequestsTable> {
               rows: _maintenanceRequests.map<DataRow>((request) {
                 return DataRow(
                   cells: [
-                    DataCell(Text(request['RequestID'].toString())),
-                    DataCell(Text(request['RequestType'].toString())),
-                    DataCell(Text(request['Asset'].toString())),
-                    DataCell(Text(request['Description'].toString())),
+                    DataCell(
+                      GestureDetector(
+                        onTap: () {
+                          _navigateToMRDetails(context, request['RequestID']);
+                        },
+                        child: Text(request['RequestID'].toString()),
+                      ),
+                    ),
+                    DataCell(
+                      GestureDetector(
+                        onTap: () {
+                          _navigateToMRDetails(context, request['RequestID']);
+                        },
+                        child: Text(request['RequestType'].toString()),
+                      ),
+                    ),
+                    DataCell(
+                      GestureDetector(
+                        onTap: () {
+                          _navigateToMRDetails(context, request['RequestID']);
+                        },
+                        child: Text(request['Asset'].toString()),
+                      ),
+                    ),
+                    DataCell(
+                      GestureDetector(
+                        onTap: () {
+                          _navigateToMRDetails(context, request['RequestID']);
+                        },
+                        child: Text(request['Description'].toString()),
+                      ),
+                    ),
                   ],
                 );
               }).toList(),
             ),
           );
+  }
+
+  void _navigateToMRDetails(BuildContext context, String RequestID) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MRDetailsPage(RequestID: RequestID),
+      ),
+    );
   }
 }

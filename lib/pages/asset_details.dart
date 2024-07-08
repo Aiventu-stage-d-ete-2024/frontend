@@ -54,45 +54,52 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
           ? Center(child: CircularProgressIndicator())
           : _assetDetails == null
               ? Center(child: Text('Asset details not found'))
-              : SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      assetAppBarBody(context),
-                      SizedBox(height: 16),
-                      Center(
-                        child: Text(
-                          'Asset Details',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF3665DB),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 16),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    assetAppBarBody(context),
+                    Expanded(
+                      child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _buildDetailRow('Asset ID', _assetDetails!['AssetID'].toString()),
-                            _buildDetailRow('Name', _assetDetails!['Name'].toString()),
-                            _buildDetailRow('Parent', _assetDetails!['Parent'].toString()),
-                            _buildDetailRow('Children', _assetDetails!['NumberOfChildren'].toString()),
-                            _buildDetailRow('Asset Type', _assetDetails!['AssetType'].toString()),
-                            _buildDetailRow('Manufacturer', _assetDetails!['Manufacturer'].toString()),
-                            _buildDetailRow('Model', _assetDetails!['Model'].toString()),
-                            _buildDetailRow('Customer Account', _assetDetails!['CustomerAccount'].toString()),
-                            _buildDetailRow('Criticality', _assetDetails!['Criticality'].toString()),
-                            _buildDetailRow('Functional Location', _assetDetails!['FunctionalLocation'].toString()),
-                            _buildDetailRow('Current Lifecycle State', _assetDetails!['CurrentLifecycleState'].toString()),
+                            SizedBox(height: 16),
+                            Center(
+                              child: Text(
+                                'Asset Details',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF3665DB),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 16),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _buildDetailRow('Asset ID', _assetDetails!['AssetID'].toString()),
+                                  _buildDetailRow('Name', _assetDetails!['Name'].toString()),
+                                  _buildDetailRow('Parent', _assetDetails!['Parent'].toString()),
+                                  _buildDetailRow('Children', _assetDetails!['NumberOfChildren'].toString()),
+                                  _buildDetailRow('Asset Type', _assetDetails!['AssetType'].toString()),
+                                  _buildDetailRow('Manufacturer', _assetDetails!['Manufacturer'].toString()),
+                                  _buildDetailRow('Model', _assetDetails!['Model'].toString()),
+                                  _buildDetailRow('Customer Account', _assetDetails!['CustomerAccount'].toString()),
+                                  _buildDetailRow('Criticality', _assetDetails!['Criticality'].toString()),
+                                  _buildDetailRow('Functional Location', _assetDetails!['FunctionalLocation'].toString()),
+                                  _buildDetailRow('Current Lifecycle State', _assetDetails!['CurrentLifecycleState'].toString()),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 16),
                           ],
                         ),
                       ),
-                      SizedBox(height: 16),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
     );
   }
@@ -121,8 +128,8 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
                 fontSize: 16,
                 color: Colors.black87,
               ),
-              overflow: TextOverflow.ellipsis, // Handle overflow gracefully
-              maxLines: 1, // Limit to 1 line
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ),
         ],
