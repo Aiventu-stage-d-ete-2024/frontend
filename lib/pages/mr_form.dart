@@ -33,7 +33,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            mrAppBarBody(context),
+            mrAppBarBody(context,isMRDetailsPage: true),
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(

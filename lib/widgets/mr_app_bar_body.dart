@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:test/pages/Asset_form.dart';
 import 'package:test/pages/mr_form.dart';
+import 'package:test/pages/mr_page.dart';
 import '../pages/home_page.dart';
 
-Widget mrAppBarBody(BuildContext context) {
+Widget mrAppBarBody(BuildContext context, {required bool isMRDetailsPage}) {
   return Container(
     color: Colors.white,
     child: Row(
@@ -11,11 +11,19 @@ Widget mrAppBarBody(BuildContext context) {
       children: [
         IconButton(
           onPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const MyHomePage(title: "Finance & Operations",)),
-              (Route<dynamic> route) => false,
-            );
+            if (isMRDetailsPage) {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => MaintenancePage()),
+                (Route<dynamic> route) => false,
+              );
+            } else {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => MyHomePage(title: "Finance & Operations")),
+                (Route<dynamic> route) => false,
+              );
+            }
           },
           icon: const Icon(Icons.arrow_back, color: Color(0xFF3665DB)),
           padding: EdgeInsets.zero,

@@ -56,7 +56,7 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                mrAppBarBody(context),
+                mrAppBarBody(context,isMRDetailsPage: true),
                 Expanded(
                   child: SingleChildScrollView(
                       child: Column(

@@ -51,7 +51,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
       body: SingleChildScrollView(
               child: Column(
                 children: [
-                  mrAppBarBody(context),
+                  mrAppBarBody(context,isMRDetailsPage: false),
                   const Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Column(
