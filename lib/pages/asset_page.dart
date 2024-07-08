@@ -51,7 +51,7 @@ class _AssetPageState extends State<AssetPage> {
       body: SingleChildScrollView(
               child: Column(
                 children: [
-                  assetAppBarBody(context),
+                  assetAppBarBody(context,isAssetDetailsPage: false),
                   const Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Column(

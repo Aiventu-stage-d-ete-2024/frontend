@@ -32,7 +32,7 @@ class _AssetFormState extends State<AssetForm> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            assetAppBarBody(context),
+            assetAppBarBody(context, isAssetDetailsPage: true),
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
