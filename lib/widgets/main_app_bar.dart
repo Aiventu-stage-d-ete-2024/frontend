@@ -10,6 +10,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: const Color(0xFF041431),
+      automaticallyImplyLeading: false,
       title: GestureDetector(
         onTap: () {
           Scaffold.of(context).openDrawer();
