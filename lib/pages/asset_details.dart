@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:test/widgets/asset_app_bar_body.dart';
+import '../widgets/asset_app_bar_body.dart';
 import 'dart:convert';
-
 import '../widgets/main_app_bar.dart';
 import '../baseUrl.dart';
 import '../widgets/drawer_widget.dart';

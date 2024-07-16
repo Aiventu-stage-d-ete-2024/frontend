@@ -1,1 +1,1 @@
-const baseUrl = "http://192.168.12.192:3000/api/";
+const baseUrl = "http://127.0.0.1:3000/api/";

@@ -61,7 +61,14 @@ class _AssetTableState extends State<AssetTable> {
                         child: Text(asset['AssetID'].toString()),
                       ),
                     ),
-                    DataCell(Text(asset['Name'].toString())),
+                    DataCell(
+                      GestureDetector(
+                        onTap: () {
+                          _navigateToAssetDetails(context, asset['AssetID']);
+                        },
+                        child: Text(asset['Name'].toString()),
+                      ),
+                    ),
                   ],
                 );
               }).toList(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test/pages/mr_form.dart';
-import 'package:test/pages/mr_page.dart';
+import '../pages/mr_form.dart';
+import '../pages/mr_page.dart';
 import '../pages/home_page.dart';
 
 Widget mrAppBarBody(BuildContext context, {required bool isMRDetailsPage}) {
