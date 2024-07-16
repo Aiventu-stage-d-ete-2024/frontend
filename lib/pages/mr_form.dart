@@ -31,7 +31,6 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
   final TextEditingController _startedByController = TextEditingController();
   final TextEditingController _responsibleGroupController = TextEditingController();
   final TextEditingController _responsibleController = TextEditingController();
-  final TextEditingController _workOrderController = TextEditingController();
   final TextEditingController _currentLifecycleStateController = TextEditingController();
   final TextEditingController _numberOfFaultsController = TextEditingController();
   
@@ -54,7 +53,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
     _descriptionController.text = details['Description']?.toString() ?? '';
     _serviceLevelController.text = details['ServiceLevel']?.toString() ?? '';
     _functionalLocationController.text = details['FunctionalLocation']?.toString() ?? '';
-    selectedAsset = details['AssetID']?.toString();
+    selectedAsset = details['Asset']?.toString();
     _jobTypeController.text = details['JobType']?.toString() ?? '';
     _jobVariantController.text = details['JobVariant']?.toString() ?? '';
     _jobTradeController.text = details['JobTrade']?.toString() ?? '';
@@ -62,7 +61,6 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
     _startedByController.text = details['StartedByWorker']?.toString() ?? '';
     _responsibleGroupController.text = details['ResponsibleWorkerGroup']?.toString() ?? '';
     _responsibleController.text = details['ResponsibleWorker']?.toString() ?? '';
-    _workOrderController.text = details['JobType']?.toString() ?? ''; // Correcting field
     _currentLifecycleStateController.text = details['CurrentLifecycleState']?.toString() ?? '';
     _numberOfFaultsController.text = details['NumberOfFaults']?.toString() ?? '';
   }
@@ -80,7 +78,6 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
     _startedByController.dispose();
     _responsibleGroupController.dispose();
     _responsibleController.dispose();
-    _workOrderController.dispose();
     _currentLifecycleStateController.dispose();
     _numberOfFaultsController.dispose();
     _actualStartController.dispose();
@@ -114,7 +111,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
     if (response.statusCode == 201) {
       _navigateToMaintenancePage();
     } else {
-       print('Response body: ${response.body}');
+       //print('Response body: ${response.body}');
       _showErrorDialog('Failed to create request');
     }
   }
@@ -128,8 +125,10 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
     );
 
     if (response.statusCode == 200) {
+      //print('Response body: ${response.body}');
       _navigateToMaintenancePage();
     } else {
+      //print('Response body: ${response.body}');
       _showErrorDialog('Failed to update request');
     }
   }
@@ -141,7 +140,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
       'Description': _descriptionController.text,
       'ServiceLevel': int.tryParse(_serviceLevelController.text) ?? 0,
       'FunctionalLocation': _functionalLocationController.text,
-      'AssetID': selectedAsset,
+      'Asset': selectedAsset,
       'JobType': _jobTypeController.text,
       'JobVariant': _jobVariantController.text,
       'JobTrade': _jobTradeController.text,
@@ -279,6 +278,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
                     onChanged: (value) {
                       setState(() {
                         selectedAsset = value;
+                        //print('Selected Asset: $selectedAsset');
                       });
                     },
                     dropdownColor: Colors.white,
@@ -305,8 +305,6 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
                   CustomTextFormField(labelText: 'Responsible Worker Group', controller: _responsibleGroupController),
                   const SizedBox(height: 20.0),
                   CustomTextFormField(labelText: 'Responsible Worker', controller: _responsibleController),
-                  const SizedBox(height: 20.0),
-                  CustomTextFormField(labelText: 'Work Order', controller: _workOrderController),
                   const SizedBox(height: 20.0),
                   CustomTextFormField(labelText: 'Current Lifecycle State', controller: _currentLifecycleStateController),
                   const SizedBox(height: 20.0),
