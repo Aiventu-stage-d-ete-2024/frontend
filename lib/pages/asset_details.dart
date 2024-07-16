@@ -9,7 +9,7 @@ import '../widgets/drawer_widget.dart';
 class AssetDetailsPage extends StatefulWidget {
   final String AssetID;
 
-  const AssetDetailsPage({required this.AssetID});
+  const AssetDetailsPage({super.key, required this.AssetID});
 
   @override
   _AssetDetailsPageState createState() => _AssetDetailsPageState();
@@ -46,13 +46,13 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(),
-      drawer: DrawerWidget(),
+      appBar: const MainAppBar(),
+      drawer: const DrawerWidget(),
       backgroundColor: Colors.white,
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : _assetDetails == null
-              ? Center(child: Text('Asset details not found'))
+              ? const Center(child: Text('Asset details not found'))
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -62,8 +62,8 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 16),
-                            Center(
+                            const SizedBox(height: 16),
+                            const Center(
                               child: Text(
                                 'Asset Details',
                                 style: TextStyle(
@@ -73,7 +73,7 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 16.0),
                               child: Column(
@@ -93,7 +93,7 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                           ],
                         ),
                       ),
@@ -113,17 +113,17 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
             width: MediaQuery.of(context).size.width * 0.4,
             child: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.black87,
               ),

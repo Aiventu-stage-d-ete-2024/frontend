@@ -11,7 +11,7 @@ import '../widgets/mr_app_bar_body.dart';
 class MRDetailsPage extends StatefulWidget {
   final String RequestID;
 
-  const MRDetailsPage({required this.RequestID});
+  const MRDetailsPage({super.key, required this.RequestID});
 
   @override
   _MRDetailsPageState createState() => _MRDetailsPageState();
@@ -48,11 +48,11 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(),
-      drawer: DrawerWidget(),
+      appBar: const MainAppBar(),
+      drawer: const DrawerWidget(),
       backgroundColor: Colors.white,
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -62,8 +62,8 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 16),
-                          Center(
+                          const SizedBox(height: 16),
+                          const Center(
                             child: Text(
                               'Maintenance Request Details',
                               style: TextStyle(
@@ -73,7 +73,7 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16.0),
                             child: Column(
@@ -98,7 +98,7 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     ],
                   ),
                 ),
@@ -117,13 +117,13 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
           children: [
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 4),
-            Text(
+            const SizedBox(height: 4),
+            const Text(
               '------------',
               style: TextStyle(
                 fontSize: 16,
@@ -148,15 +148,15 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             displayValue,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               color: Colors.black87,
             ),

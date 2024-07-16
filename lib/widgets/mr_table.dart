@@ -5,7 +5,7 @@ import '../baseURL.dart';
 import '../pages/mr_details.dart';
 
 class MaintenanceRequestsTable extends StatefulWidget {
-  const MaintenanceRequestsTable({Key? key}) : super(key: key);
+  const MaintenanceRequestsTable({super.key});
 
   @override
   _MaintenanceRequestsTableState createState() => _MaintenanceRequestsTableState();

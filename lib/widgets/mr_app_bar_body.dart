@@ -14,13 +14,13 @@ Widget mrAppBarBody(BuildContext context, {required bool isMRDetailsPage}) {
             if (isMRDetailsPage) {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => MaintenancePage()),
+                MaterialPageRoute(builder: (context) => const MaintenancePage()),
                 (Route<dynamic> route) => false,
               );
             } else {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => MyHomePage(title: "Finance & Operations")),
+                MaterialPageRoute(builder: (context) => const MyHomePage(title: "Finance & Operations")),
                 (Route<dynamic> route) => false,
               );
             }

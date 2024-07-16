@@ -5,7 +5,7 @@ import '../widgets/drawer_widget.dart';
 import '../widgets/asset_app_bar_body.dart'; // Import here
 
 class AssetForm extends StatefulWidget {
-  const AssetForm({Key? key}) : super(key: key);
+  const AssetForm({super.key});
 
   @override
   _AssetFormState createState() => _AssetFormState();
@@ -41,9 +41,9 @@ class _AssetFormState extends State<AssetForm> {
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                   ),*/
-                  SizedBox(height: 20.0),
-                  AssetFormFields(),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
+                  const AssetFormFields(),
+                  const SizedBox(height: 20.0),
                   Align(
                     alignment: Alignment.center,
                     child: ElevatedButton(
@@ -55,10 +55,10 @@ class _AssetFormState extends State<AssetForm> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                        textStyle: TextStyle(fontSize: 18),
+                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                        textStyle: const TextStyle(fontSize: 18),
                       ),
-                      child: Text('Confirm'),
+                      child: const Text('Confirm'),
                     ),
                   ),
                 ],
@@ -72,12 +72,14 @@ class _AssetFormState extends State<AssetForm> {
 }
 
 class AssetFormFields extends StatelessWidget {
+  const AssetFormFields({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
+      child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextFormField(labelText: 'Asset ID'),
@@ -109,18 +111,18 @@ class AssetFormFields extends StatelessWidget {
 class CustomTextFormField extends StatelessWidget {
   final String labelText;
 
-  const CustomTextFormField({required this.labelText});
+  const CustomTextFormField({super.key, required this.labelText});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.normal,
         ),
-        floatingLabelStyle: TextStyle(
+        floatingLabelStyle: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
           color: Color(0xFF3665DB)
@@ -130,11 +132,11 @@ class CustomTextFormField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(color: Color(0xFF3665DB), width: 2.0),
+          borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       ),
-      style: TextStyle(fontSize: 16),
+      style: const TextStyle(fontSize: 16),
     );
   }
 }

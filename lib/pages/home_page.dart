@@ -60,17 +60,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     calendarStyle: CalendarStyle(
                       todayDecoration: BoxDecoration(
                         color: Colors.transparent,
-                        border: Border.all(color: Color(0xFF3665DB), width: 2.0),
+                        border: Border.all(color: const Color(0xFF3665DB), width: 2.0),
                         shape: BoxShape.circle,
                       ),
-                      selectedDecoration: BoxDecoration(
+                      selectedDecoration: const BoxDecoration(
                         color: Color(0xFF3665DB),
                         shape: BoxShape.circle,
                       ),
-                      selectedTextStyle: TextStyle(color: Colors.white),
-                      todayTextStyle: TextStyle(color: Color(0xFF3665DB)),
-                      weekendTextStyle: TextStyle(color: Color(0xFF3665DB)),
-                      outsideTextStyle: TextStyle(color: Colors.grey),
+                      selectedTextStyle: const TextStyle(color: Colors.white),
+                      todayTextStyle: const TextStyle(color: Color(0xFF3665DB)),
+                      weekendTextStyle: const TextStyle(color: Color(0xFF3665DB)),
+                      outsideTextStyle: const TextStyle(color: Colors.grey),
                       outsideDaysVisible: false,
                     ),
                   ),

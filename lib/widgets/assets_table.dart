@@ -5,7 +5,7 @@ import '../baseURL.dart';
 import '../pages/asset_details.dart';
 
 class AssetTable extends StatefulWidget {
-  const AssetTable({Key? key}) : super(key: key);
+  const AssetTable({super.key});
 
   @override
   _AssetTableState createState() => _AssetTableState();
@@ -42,7 +42,7 @@ class _AssetTableState extends State<AssetTable> {
   @override
   Widget build(BuildContext context) {
     return _isLoading
-        ? Center(child: CircularProgressIndicator())
+        ? const Center(child: CircularProgressIndicator())
         : SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: DataTable(
