@@ -192,7 +192,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
       return Theme(
         data: ThemeData.light().copyWith(
           primaryColor: const Color(0xFF3665DB), // Primary color for the scheme
-          dialogBackgroundColor: Colors.white, colorScheme: ColorScheme.light(primary: const Color(0xFF3665DB)).copyWith(secondary: const Color(0xFF3665DB)), // Background color of the dialog
+          dialogBackgroundColor: Colors.white, colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)).copyWith(secondary: const Color(0xFF3665DB)), // Background color of the dialog
         ),
         child: child!,
       );
@@ -208,7 +208,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
           data: ThemeData.light().copyWith(
             primaryColor: const Color(0xFF3665DB), // Header color
             dialogBackgroundColor: Colors.white, // Background color of the dialog
-            colorScheme: ColorScheme.light(primary: const Color(0xFF3665DB)), // Primary color for the scheme
+            colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)), // Primary color for the scheme
           ),
           child: child!,
         );
@@ -340,10 +340,10 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
 
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.labelText,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

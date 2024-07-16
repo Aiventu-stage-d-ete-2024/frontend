@@ -132,7 +132,7 @@ Widget mrAppBarBody(BuildContext context, {required bool isMRDetailsPage, Map<St
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
           ),
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(EdgeInsets.zero),
+            padding: WidgetStateProperty.all(EdgeInsets.zero),
           ),
         ),
         const Spacer(),
