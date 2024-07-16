@@ -25,7 +25,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
   }
 
   Future<void> _fetchMaintenanceRequests() async {
-    final url = Uri.parse('${baseUrl}maintenancerequests');
+    final url = Uri.parse('${baseUrl}maintenanceRequests');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

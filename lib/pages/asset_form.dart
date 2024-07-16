@@ -92,7 +92,6 @@ void initState() {
         (Route<dynamic> route) => false,
       );
     } else {
-      // Handle the error
       _showErrorDialog('Failed to create asset');
     }
   }

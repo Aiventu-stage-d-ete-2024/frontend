@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'dart:convert';
-
 import '../widgets/main_app_bar.dart';
 import '../baseUrl.dart';
 import '../widgets/drawer_widget.dart';
@@ -56,7 +55,7 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                mrAppBarBody(context,isMRDetailsPage: true),
+                mrAppBarBody(context,isMRDetailsPage: true, mrDetails: _mrDetails),
                 Expanded(
                   child: SingleChildScrollView(
                       child: Column(

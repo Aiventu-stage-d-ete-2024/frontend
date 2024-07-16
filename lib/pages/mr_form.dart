@@ -4,21 +4,229 @@ import '../pages/mr_page.dart';
 import '../widgets/main_app_bar.dart';
 import '../widgets/drawer_widget.dart';
 import '../widgets/mr_app_bar_body.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../baseURL.dart';
 
 class MaintenanceRequestForm extends StatefulWidget {
-  const MaintenanceRequestForm({super.key});
+  final bool isUpdate;
+  final Map<String, dynamic>? mrDetails;
+
+  const MaintenanceRequestForm({super.key, this.isUpdate = false, this.mrDetails});
 
   @override
   _MaintenanceRequestFormState createState() => _MaintenanceRequestFormState();
 }
 
 class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
-  final TextEditingController _filterController = TextEditingController();
+  final TextEditingController _requestIDController = TextEditingController();
+  final TextEditingController _requestTypeController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _serviceLevelController = TextEditingController();
+  final TextEditingController _functionalLocationController = TextEditingController();
+  final TextEditingController _jobTypeController = TextEditingController();
+  final TextEditingController _jobVariantController = TextEditingController();
+  final TextEditingController _jobTradeController = TextEditingController();
+  final TextEditingController _actualStartController = TextEditingController();
+  final TextEditingController _startedByController = TextEditingController();
+  final TextEditingController _responsibleGroupController = TextEditingController();
+  final TextEditingController _responsibleController = TextEditingController();
+  final TextEditingController _workOrderController = TextEditingController();
+  final TextEditingController _currentLifecycleStateController = TextEditingController();
+  final TextEditingController _numberOfFaultsController = TextEditingController();
+  
+  List<dynamic> assets = [];
+  String? selectedAsset;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAssets();
+    if (widget.isUpdate && widget.mrDetails != null) {
+      _populateFields();
+    }
+  }
+
+  void _populateFields() {
+    final details = widget.mrDetails!;
+    _requestIDController.text = details['RequestID']?.toString() ?? '';
+    _requestTypeController.text = details['RequestType']?.toString() ?? '';
+    _descriptionController.text = details['Description']?.toString() ?? '';
+    _serviceLevelController.text = details['ServiceLevel']?.toString() ?? '';
+    _functionalLocationController.text = details['FunctionalLocation']?.toString() ?? '';
+    selectedAsset = details['AssetID']?.toString();
+    _jobTypeController.text = details['JobType']?.toString() ?? '';
+    _jobVariantController.text = details['JobVariant']?.toString() ?? '';
+    _jobTradeController.text = details['JobTrade']?.toString() ?? '';
+    _actualStartController.text = details['ActualStart']?.toString() ?? '';
+    _startedByController.text = details['StartedByWorker']?.toString() ?? '';
+    _responsibleGroupController.text = details['ResponsibleWorkerGroup']?.toString() ?? '';
+    _responsibleController.text = details['ResponsibleWorker']?.toString() ?? '';
+    _workOrderController.text = details['JobType']?.toString() ?? ''; // Correcting field
+    _currentLifecycleStateController.text = details['CurrentLifecycleState']?.toString() ?? '';
+    _numberOfFaultsController.text = details['NumberOfFaults']?.toString() ?? '';
+  }
 
   @override
   void dispose() {
-    _filterController.dispose();
+    _requestIDController.dispose();
+    _requestTypeController.dispose();
+    _descriptionController.dispose();
+    _serviceLevelController.dispose();
+    _functionalLocationController.dispose();
+    _jobTypeController.dispose();
+    _jobVariantController.dispose();
+    _jobTradeController.dispose();
+    _startedByController.dispose();
+    _responsibleGroupController.dispose();
+    _responsibleController.dispose();
+    _workOrderController.dispose();
+    _currentLifecycleStateController.dispose();
+    _numberOfFaultsController.dispose();
+    _actualStartController.dispose();
     super.dispose();
+  }
+
+  Future<void> fetchAssets() async {
+    try {
+      final response = await http.get(Uri.parse('${baseUrl}assets'));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          assets = data['assets'];
+        });
+      } else {
+        throw Exception('Failed to load assets');
+      }
+    } catch (e) {
+      _showErrorDialog('Failed to load assets: $e');
+    }
+  }
+
+  Future<void> createMaintenanceRequest() async {
+    final url = Uri.parse('${baseUrl}maintenanceRequests');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(_buildRequestPayload()),
+    );
+
+    if (response.statusCode == 201) {
+      _navigateToMaintenancePage();
+    } else {
+       print('Response body: ${response.body}');
+      _showErrorDialog('Failed to create request');
+    }
+  }
+
+  Future<void> updateMaintenanceRequest() async {
+    final url = Uri.parse('${baseUrl}maintenanceRequests/${widget.mrDetails!['_id']}');
+    final response = await http.put(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(_buildRequestPayload()),
+    );
+
+    if (response.statusCode == 200) {
+      _navigateToMaintenancePage();
+    } else {
+      _showErrorDialog('Failed to update request');
+    }
+  }
+
+  Map<String, dynamic> _buildRequestPayload() {
+    return {
+      'RequestID': _requestIDController.text,
+      'RequestType': _requestTypeController.text,
+      'Description': _descriptionController.text,
+      'ServiceLevel': int.tryParse(_serviceLevelController.text) ?? 0,
+      'FunctionalLocation': _functionalLocationController.text,
+      'AssetID': selectedAsset,
+      'JobType': _jobTypeController.text,
+      'JobVariant': _jobVariantController.text,
+      'JobTrade': _jobTradeController.text,
+      'ActualStart': _actualStartController.text,
+      'StartedByWorker': _startedByController.text,
+      'ResponsibleWorkerGroup': _responsibleGroupController.text,
+      'ResponsibleWorker': _responsibleController.text,
+      'CurrentLifecycleState': _currentLifecycleStateController.text,
+      'NumberOfFaults': int.tryParse(_numberOfFaultsController.text) ?? 0,
+    };
+  }
+
+  void _navigateToMaintenancePage() {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const MaintenancePage()),
+      (Route<dynamic> route) => false,
+    );
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _selectDateAndTime() async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    builder: (BuildContext context, Widget? child) {
+      return Theme(
+        data: ThemeData.light().copyWith(
+          primaryColor: const Color(0xFF3665DB), // Primary color for the scheme
+          dialogBackgroundColor: Colors.white, colorScheme: ColorScheme.light(primary: const Color(0xFF3665DB)).copyWith(secondary: const Color(0xFF3665DB)), // Background color of the dialog
+        ),
+        child: child!,
+      );
+    },
+  );
+
+    if (pickedDate != null) {
+      TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: const Color(0xFF3665DB), // Header color
+            dialogBackgroundColor: Colors.white, // Background color of the dialog
+            colorScheme: ColorScheme.light(primary: const Color(0xFF3665DB)), // Primary color for the scheme
+          ),
+          child: child!,
+        );
+      },
+    );
+
+      if (pickedTime != null) {
+        DateTime finalDateTime = DateTime(
+          pickedDate.year,
+          pickedDate.month,
+          pickedDate.day,
+          pickedTime.hour,
+          pickedTime.minute,
+        );
+
+        _actualStartController.text = DateFormat('yyyy-MM-dd HH:mm').format(finalDateTime);
+      }
+    }
   }
 
   @override
@@ -30,31 +238,84 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            mrAppBarBody(context,isMRDetailsPage: true),
+            mrAppBarBody(context, isMRDetailsPage: true),
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  /*Center(
-                    child: Text(
-                      'Maintenance Request Form',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                  ),*/
                   const SizedBox(height: 20.0),
-                  const MaintenanceRequestFormFields(),
+                  CustomTextFormField(labelText: 'Maintenance Request', controller: _requestIDController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Maintenance Request Type', controller: _requestTypeController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Description', controller: _descriptionController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Service Level', controller: _serviceLevelController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Functional Location', controller: _functionalLocationController),
+                  const SizedBox(height: 20.0),
+                  DropdownButtonFormField<String>(
+                    value: selectedAsset,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      labelText: 'Select An Asset',
+                      labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                      floatingLabelStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF3665DB)),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                    ),
+                    items: assets.map<DropdownMenuItem<String>>((asset) {
+                      return DropdownMenuItem<String>(
+                        value: asset['AssetID'],
+                        child: Text(asset['Name']),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedAsset = value;
+                      });
+                    },
+                    dropdownColor: Colors.white,
+                  ),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Maintenance Job Type', controller: _jobTypeController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Maintenance Job Variant', controller: _jobVariantController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Maintenance Job Trade', controller: _jobTradeController),
+                  const SizedBox(height: 20.0),
+                  GestureDetector(
+                    onTap: _selectDateAndTime,
+                    child: AbsorbPointer(
+                      child: CustomTextFormField(
+                        labelText: 'Actual Start',
+                        controller: _actualStartController,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Started By', controller: _startedByController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Responsible Worker Group', controller: _responsibleGroupController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Responsible Worker', controller: _responsibleController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Work Order', controller: _workOrderController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Current Lifecycle State', controller: _currentLifecycleStateController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Number Of Faults', controller: _numberOfFaultsController),
                   const SizedBox(height: 20.0),
                   Align(
                     alignment: Alignment.center,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => const MaintenancePage()),
-                          (Route<dynamic> route) => false,
-                        );
-                      },
+                      onPressed: widget.isUpdate ? updateMaintenanceRequest : createMaintenanceRequest,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF3665DB),
@@ -74,151 +335,15 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
   }
 }
 
-class MaintenanceRequestFormFields extends StatefulWidget {
-  const MaintenanceRequestFormFields({super.key});
-
-  @override
-  _MaintenanceRequestFormFieldsState createState() => _MaintenanceRequestFormFieldsState();
-}
-
-class _MaintenanceRequestFormFieldsState extends State<MaintenanceRequestFormFields> {
-  final bool _isAssetVerified = false;
-  final TextEditingController _actualStartController = TextEditingController();
-
-Future<void> _selectDateTime(BuildContext context) async {
-  DateTime? selectedDate = await showDatePicker(
-    context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime(2000),
-    lastDate: DateTime(2101),
-    builder: (BuildContext context, Widget? child) {
-      return Theme(
-        data: ThemeData.light().copyWith(
-          primaryColor: const Color(0xFF3665DB),
-          dialogBackgroundColor: Colors.white, colorScheme: const ColorScheme.light(
-            primary: Color(0xFF3665DB),
-            onPrimary: Colors.white,
-            surface: Colors.white,
-            onSurface: Color(0xFF3665DB),
-          ).copyWith(secondary: const Color(0xFF3665DB)),
-        ),
-        child: child!,
-      );
-    },
-  );
-
-  if (selectedDate != null) {
-    TimeOfDay? selectedTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.fromDateTime(DateTime.now()),
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: ThemeData.light().copyWith(
-            primaryColor: const Color(0xFF3665DB),
-            dialogBackgroundColor: Colors.white, colorScheme: const ColorScheme.light(
-              primary: Color(0xFF3665DB),
-              onPrimary: Colors.white,
-              surface: Colors.white,
-              onSurface: Color(0xFF3665DB),
-            ).copyWith(secondary: const Color(0xFF3665DB)),
-          ),
-          child: child!,
-        );
-      },
-    );
-
-    if (selectedTime != null) {
-      final DateTime selectedDateTime = DateTime(
-        selectedDate.year,
-        selectedDate.month,
-        selectedDate.day,
-        selectedTime.hour,
-        selectedTime.minute,
-      );
-      final String formattedDateTime = DateFormat('M/d/yyyy h:mm:ss a').format(selectedDateTime);
-      setState(() {
-        _actualStartController.text = formattedDateTime;
-      });
-    }
-  }
-}
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.9,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CustomTextFormField(labelText: 'Maintenance Request'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Maintenance Request Type'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Description'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Service Level'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Functional Location'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Asset'),
-            const SizedBox(height: 20.0),
-            //CustomTextFormField(labelText: 'Asset Verified'),
-            /*CheckboxListTile(
-              title: Text('Asset Verified'),
-              value: _isAssetVerified,
-              onChanged: (bool? value) {
-                setState(() {
-                  _isAssetVerified = value ?? false;
-                });
-              },
-              controlAffinity: ListTileControlAffinity.leading,
-              activeColor: Color(0xFF3665DB),
-            ),
-            SizedBox(height: 20.0),*/
-            const CustomTextFormField(labelText: 'Maintenance Job Type'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Maintenance Job Type Variant'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Trade'),
-            const SizedBox(height: 20.0),
-            GestureDetector(
-              onTap: () => _selectDateTime(context),
-              child: AbsorbPointer(
-                child: CustomTextFormField(
-                  labelText: 'Actual Start',
-                  controller: _actualStartController,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Started By'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Responsible Group'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Responsible'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Work Order'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Current Lifecycle State'),
-            const SizedBox(height: 20.0),
-            const CustomTextFormField(labelText: 'Number of faults'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class CustomTextFormField extends StatelessWidget {
   final String labelText;
-  final TextEditingController? controller;
+  final TextEditingController controller;
 
-  const CustomTextFormField({super.key, 
+  const CustomTextFormField({
+    Key? key,
     required this.labelText,
-    this.controller,
-  });
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
