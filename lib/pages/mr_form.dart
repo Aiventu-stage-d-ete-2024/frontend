@@ -56,6 +56,8 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: const Color(0xFF3665DB),
                         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                         textStyle: const TextStyle(fontSize: 18),
                       ),

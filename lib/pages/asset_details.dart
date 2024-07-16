@@ -56,7 +56,7 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    assetAppBarBody(context, isAssetDetailsPage: true),
+                    assetAppBarBody(context, isAssetDetailsPage: true, assetDetails: _assetDetails),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(

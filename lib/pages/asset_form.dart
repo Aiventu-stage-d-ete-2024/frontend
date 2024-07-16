@@ -8,7 +8,10 @@ import '../widgets/drawer_widget.dart';
 import '../widgets/asset_app_bar_body.dart';
 
 class AssetForm extends StatefulWidget {
-  const AssetForm({super.key});
+  final bool isUpdate;
+  final Map<String, dynamic>? assetDetails;
+
+  const AssetForm({super.key, this.isUpdate = false, this.assetDetails});
 
   @override
   _AssetFormState createState() => _AssetFormState();
@@ -26,6 +29,25 @@ class _AssetFormState extends State<AssetForm> {
   final TextEditingController _criticalityController = TextEditingController();
   final TextEditingController _functionalLocationController = TextEditingController();
   final TextEditingController _currentLifecycleStateController = TextEditingController();
+
+@override
+void initState() {
+  super.initState();
+  if (widget.isUpdate && widget.assetDetails != null) {
+    _assetIdController.text = widget.assetDetails!['AssetID']?.toString() ?? '';
+    _nameController.text = widget.assetDetails!['Name']?.toString() ?? '';
+    _parentController.text = widget.assetDetails!['Parent']?.toString() ?? '';
+    _numberOfChildrenController.text = widget.assetDetails!['NumberOfChildren']?.toString() ?? '';
+    _assetTypeController.text = widget.assetDetails!['AssetType']?.toString() ?? '';
+    _manufacturerController.text = widget.assetDetails!['Manufacturer']?.toString() ?? '';
+    _modelController.text = widget.assetDetails!['Model']?.toString() ?? '';
+    _customerAccountController.text = widget.assetDetails!['CustomerAccount']?.toString() ?? '';
+    _criticalityController.text = widget.assetDetails!['Criticality']?.toString() ?? '';
+    _functionalLocationController.text = widget.assetDetails!['FunctionalLocation']?.toString() ?? '';
+    _currentLifecycleStateController.text = widget.assetDetails!['CurrentLifecycleState']?.toString() ?? '';
+  }
+}
+
 
   @override
   void dispose() {
@@ -71,24 +93,59 @@ class _AssetFormState extends State<AssetForm> {
       );
     } else {
       // Handle the error
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text('Failed to create asset'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
+      _showErrorDialog('Failed to create asset');
     }
+  }
+
+  Future<void> _updateAsset() async {
+    final url = Uri.parse('${baseUrl}assets/${widget.assetDetails!['_id']}');
+    final response = await http.put(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        'AssetID': _assetIdController.text,
+        'Name': _nameController.text,
+        'Parent': _parentController.text,
+        'NumberOfChildren': _numberOfChildrenController.text,
+        'AssetType': _assetTypeController.text,
+        'Manufacturer': _manufacturerController.text,
+        'Model': _modelController.text,
+        'CustomerAccount': _customerAccountController.text,
+        'Criticality': _criticalityController.text,
+        'FunctionalLocation': _functionalLocationController.text,
+        'CurrentLifecycleState': _currentLifecycleStateController.text,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const AssetPage()),
+        (Route<dynamic> route) => false,
+      );
+    } else {
+      _showErrorDialog('Failed to update asset');
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -124,8 +181,10 @@ class _AssetFormState extends State<AssetForm> {
                   Align(
                     alignment: Alignment.center,
                     child: ElevatedButton(
-                      onPressed: _createAsset,
+                      onPressed: widget.isUpdate ? _updateAsset : _createAsset,
                       style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: const Color(0xFF3665DB),
                         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                         textStyle: const TextStyle(fontSize: 18),
                       ),
@@ -249,7 +308,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.controller,
   });
 
-  @override
+@override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
