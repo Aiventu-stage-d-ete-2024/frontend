@@ -75,7 +75,7 @@ class _SignupPageState extends State<SignupPage> {
           builder: (context) => AlertDialog(
             backgroundColor: Colors.white,
             title: const Text(
-              'Signup Successful',
+              'Signed Up Successfully !',
               style: TextStyle(color: Color(0xFF3665DB)),
             ),
             actions: [
@@ -125,7 +125,7 @@ class _SignupPageState extends State<SignupPage> {
             style: TextStyle(color: Color(0xFF3665DB)),
           ),
           content: const Text(
-            'Failed to signup. Please try again later.',
+            'Failed to sign up. Please try again later.',
             style: TextStyle(color: Color(0xFF3665DB)),
           ),
           actions: [
@@ -155,7 +155,7 @@ class _SignupPageState extends State<SignupPage> {
           onPressed: () {
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => const MyHomePage(title: "Finance & Operations")),
+                    MaterialPageRoute(builder: (context) => const SigninPage()),
                     (Route<dynamic> route) => false,
                   );
                 },

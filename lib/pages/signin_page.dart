@@ -44,7 +44,7 @@ class _SigninPageState extends State<SigninPage> {
         builder: (context) => AlertDialog(
           backgroundColor: Colors.white,
           title: const Text(
-            'SignIn Successful',
+            'Signed In Successfully !',
             style: TextStyle(color: Color(0xFF3665DB)),
           ),
           actions: [
@@ -72,7 +72,7 @@ class _SigninPageState extends State<SigninPage> {
             style: TextStyle(color: Color(0xFF3665DB)),
           ),
           content: const Text(
-            'Failed to signin. Please try again later.',
+            'Failed to sign in. Please try again later.',
             style: TextStyle(color: Color(0xFF3665DB)),
           ),
           actions: [
@@ -105,6 +105,14 @@ class _SigninPageState extends State<SigninPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    /*Align(
+                      alignment: Alignment.topCenter,
+                      child: Image.asset(
+                          'assets/images/aiventu.png',
+                          height: 50,
+                          width: 500,
+                        ),
+                    ),*/
                     Image.asset(
                       'assets/images/signin.jpg',
                       height: 350,

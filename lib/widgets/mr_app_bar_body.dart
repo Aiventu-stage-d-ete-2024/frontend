@@ -126,7 +126,7 @@ Widget mrAppBarBody(BuildContext context, {required bool isMRDetailsPage, Map<St
           icon: const Icon(Icons.delete, color: Color(0xFF3665DB)),
           padding: EdgeInsets.zero,
         ),
-        const Spacer(),
+        //const Spacer(),
         TextButton.icon(
           onPressed: () {},
           label: const Text(
@@ -137,7 +137,7 @@ Widget mrAppBarBody(BuildContext context, {required bool isMRDetailsPage, Map<St
             padding: WidgetStateProperty.all(EdgeInsets.zero),
           ),
         ),
-        const Spacer(),
+        /*const Spacer(),
         IconButton(
           onPressed: () {},
           icon: const Icon(Icons.attachment, color: Color(0xFF3665DB)),
@@ -147,7 +147,7 @@ Widget mrAppBarBody(BuildContext context, {required bool isMRDetailsPage, Map<St
           onPressed: () {},
           icon: const Icon(Icons.refresh, color: Color(0xFF3665DB)),
           padding: EdgeInsets.zero,
-        ),
+        ),*/
       ],
     ),
   );
