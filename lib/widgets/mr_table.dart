@@ -95,11 +95,12 @@ class _MaintenanceRequestsTableState extends State<MaintenanceRequestsTable> {
   }
 
   void _navigateToMRDetails(BuildContext context, String RequestID) {
-    Navigator.push(
+    Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
         builder: (context) => MRDetailsPage(RequestID: RequestID),
       ),
+      (Route<dynamic> route) => false,
     );
   }
 }

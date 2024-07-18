@@ -77,11 +77,12 @@ class _AssetTableState extends State<AssetTable> {
   }
 
   void _navigateToAssetDetails(BuildContext context, String AssetID) {
-    Navigator.push(
+    Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
         builder: (context) => AssetDetailsPage(AssetID: AssetID),
       ),
+      (Route<dynamic> route) => false,
     );
   }
 }

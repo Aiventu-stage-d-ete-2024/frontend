@@ -46,7 +46,7 @@ Widget mrAppBarBody(BuildContext context, {required bool isMRDetailsPage, Map<St
         IconButton(
           onPressed: () {
             if (isMRDetailsPage && mrDetails != null) {
-              Navigator.push(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                   builder: (context) => MaintenanceRequestForm(
@@ -54,6 +54,7 @@ Widget mrAppBarBody(BuildContext context, {required bool isMRDetailsPage, Map<St
                     mrDetails: mrDetails,
                   ),
                 ),
+                (Route<dynamic> route) => false,
               );
             }
           },
@@ -62,11 +63,12 @@ Widget mrAppBarBody(BuildContext context, {required bool isMRDetailsPage, Map<St
         ),
         IconButton(
           onPressed: () {
-            Navigator.push(
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                 builder: (context) => const MaintenanceRequestForm(),
               ),
+              (Route<dynamic> route) => false,
             );
           },
           icon: const Icon(Icons.add, color: Color(0xFF3665DB)),

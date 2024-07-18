@@ -136,9 +136,10 @@ class _SigninPageState extends State<SigninPage> {
                     const SizedBox(height: 20.0),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (context) => const SignupPage()),
+                          (Route<dynamic> route) => false,
                         );
                       },
                       child: const Text(

@@ -46,7 +46,7 @@ Widget assetAppBarBody(BuildContext context, {required bool isAssetDetailsPage, 
         IconButton(
           onPressed: () {
             if (isAssetDetailsPage && assetDetails != null) {
-              Navigator.push(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                   builder: (context) => AssetForm(
@@ -54,6 +54,7 @@ Widget assetAppBarBody(BuildContext context, {required bool isAssetDetailsPage, 
                     assetDetails: assetDetails,
                   ),
                 ),
+                (Route<dynamic> route) => false,
               );
             }
           },
@@ -62,11 +63,12 @@ Widget assetAppBarBody(BuildContext context, {required bool isAssetDetailsPage, 
         ),
         IconButton(
           onPressed: () {
-            Navigator.push(
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                 builder: (context) => const AssetForm(),
               ),
+              (Route<dynamic> route) => false,
             );
           },
           icon: const Icon(Icons.add, color: Color(0xFF3665DB)),
