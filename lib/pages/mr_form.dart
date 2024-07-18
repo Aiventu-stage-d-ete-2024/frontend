@@ -272,7 +272,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
                     items: assets.map<DropdownMenuItem<String>>((asset) {
                       return DropdownMenuItem<String>(
                         value: asset['AssetID'],
-                        child: Text(asset['Name']),
+                        child: Text('${asset['AssetID']}:${asset['Name']}'),
                       );
                     }).toList(),
                     onChanged: (value) {
@@ -282,6 +282,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
                       });
                     },
                     dropdownColor: Colors.white,
+                    isExpanded: true,
                   ),
                   const SizedBox(height: 20.0),
                   CustomTextFormField(labelText: 'Maintenance Job Type', controller: _jobTypeController),
