@@ -272,7 +272,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
                     items: assets.map<DropdownMenuItem<String>>((asset) {
                       return DropdownMenuItem<String>(
                         value: asset['AssetID'],
-                        child: Text('${asset['AssetID']}:${asset['Name']}'),
+                        child: Text('${asset['AssetID']} : ${asset['Name']}'),
                       );
                     }).toList(),
                     onChanged: (value) {
