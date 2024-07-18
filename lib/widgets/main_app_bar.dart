@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test/pages/signin_page.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({super.key});
@@ -50,8 +51,15 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
         Container(
           margin: EdgeInsets.zero,
           child: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.supervised_user_circle_rounded, color: Colors.white),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SigninPage()),
+                    (Route<dynamic> route) => false,
+                  );
+            },
+            //icon: const Icon(Icons.supervised_user_circle_rounded, color: Colors.white),
+            icon: const Icon(Icons.exit_to_app_rounded, color: Colors.white),
             padding: EdgeInsets.zero,
           ),
         ),
