@@ -27,7 +27,6 @@ class _CounterPageState extends State<CounterPage> {
   }
 
   Future<void> _fetchCounters() async {
-    // Only fetch if assetId is provided
     if (widget.assetId == null) {
       setState(() {
         _isLoading = false;

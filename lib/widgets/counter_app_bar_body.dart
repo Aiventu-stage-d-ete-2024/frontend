@@ -5,7 +5,6 @@ import '../pages/home_page.dart';
 import '../baseURL.dart';
 import 'package:http/http.dart' as http;
 
-// Function to delete a counter
 Future<void> deleteCounter(String counterId) async {
   final url = Uri.parse('${baseUrl}counters/$counterId');
   final response = await http.delete(
@@ -18,7 +17,6 @@ Future<void> deleteCounter(String counterId) async {
   }
 }
 
-// Widget for AppBar actions in Counter pages
 Widget counterAppBarBody(
   BuildContext context, {
   required bool isCounterDetailsPage,
@@ -30,18 +28,15 @@ Widget counterAppBarBody(
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Back Button
         IconButton(
           onPressed: () {
             if (isCounterDetailsPage) {
-              // From Details page -> Go back to Counter List page
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const CounterPage()),
                 (Route<dynamic> route) => false,
               );
             } else {
-              // From Counter List page -> Go back to Home page
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
@@ -55,7 +50,6 @@ Widget counterAppBarBody(
           padding: EdgeInsets.zero,
         ),
 
-        // Edit Button (Details page only)
         if (isCounterDetailsPage && counterDetails != null)
           IconButton(
             onPressed: () {
@@ -74,7 +68,6 @@ Widget counterAppBarBody(
             padding: EdgeInsets.zero,
           ),
 
-        // Add Button (List page only)
         if (!isCounterDetailsPage)
           IconButton(
             onPressed: () {
@@ -88,7 +81,6 @@ Widget counterAppBarBody(
             padding: EdgeInsets.zero,
           ),
 
-        // Delete Button (Details page only)
         if (isCounterDetailsPage && counterDetails != null)
           IconButton(
             onPressed: () {

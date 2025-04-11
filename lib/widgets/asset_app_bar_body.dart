@@ -6,7 +6,6 @@ import '../pages/home_page.dart';
 import '../pages/asset_page.dart';
 import '../baseURL.dart';
 
-/// Deletes the asset with the given ID from the backend.
 Future<void> deleteAsset(String assetId) async {
   final url = Uri.parse('${baseUrl}assets/$assetId');
   final response = await http.delete(
@@ -19,7 +18,6 @@ Future<void> deleteAsset(String assetId) async {
   }
 }
 
-/// Builds the top app bar actions section with context-aware logic.
 Widget assetAppBarBody(
   BuildContext context, {
   required bool isAssetDetailsPage,
@@ -31,7 +29,6 @@ Widget assetAppBarBody(
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // 🔙 Back button
         IconButton(
           onPressed: () {
             if (isAssetDetailsPage) {
@@ -52,7 +49,6 @@ Widget assetAppBarBody(
           padding: EdgeInsets.zero,
         ),
 
-        // If NOT in asset details page, show ➕ Add button
         if (!isAssetDetailsPage)
           IconButton(
             onPressed: () {
@@ -66,7 +62,6 @@ Widget assetAppBarBody(
             padding: EdgeInsets.zero,
           ),
 
-        // If IN asset details page, show ✏️ Edit, 🗑️ Delete, and 📊 Counters
         if (isAssetDetailsPage && assetDetails != null) ...[
           IconButton(
             onPressed: () {
@@ -108,7 +103,7 @@ Widget assetAppBarBody(
                         onPressed: () async {
                           try {
                             await deleteAsset(assetDetails['_id']);
-                            Navigator.of(context).pop(); // Close dialog
+                            Navigator.of(context).pop(); 
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(builder: (context) => const AssetPage()),

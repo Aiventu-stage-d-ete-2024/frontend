@@ -16,6 +16,7 @@ dependencies:
   syncfusion_flutter_datagrid: ^26.1.38
   intl: any
   rename_app: ^1.6.2
+  provider: ^6.1.4
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1

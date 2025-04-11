@@ -27,18 +27,15 @@ Widget mrAppBarBody(BuildContext context, {
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Back Arrow
         IconButton(
           onPressed: () {
             if (isMRDetailsPage) {
-              // Go to MR Page
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const MaintenancePage()),
                 (Route<dynamic> route) => false,
               );
             } else {
-              // Go to Home Page
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const MyHomePage(title: "Finance & Operations")),
@@ -50,7 +47,6 @@ Widget mrAppBarBody(BuildContext context, {
           padding: EdgeInsets.zero,
         ),
 
-        // Buttons only visible in MR Details Page
         if (isMRDetailsPage && mrDetails != null) ...[
           IconButton(
             onPressed: () {
@@ -113,7 +109,6 @@ Widget mrAppBarBody(BuildContext context, {
           ),
         ],
 
-        // Add button only visible in MR Page
         if (!isMRDetailsPage)
           IconButton(
             onPressed: () {
