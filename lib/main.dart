@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'pages/signin_page.dart';
 import 'pages/home_page.dart';
 import 'pages/asset_page.dart';
 import 'pages/SplashScreen.dart';
@@ -21,14 +20,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
       routes: {
         '/assets': (context) => const AssetPage(),
         '/maintenancerequests': (context) => const MaintenancePage(),
         '/counters': (context) => const CounterPage(),
         '/home': (context) => const MyHomePage(title: 'Finance & Operations'),
         '/signup': (context) => const SignupPage(),
-        '/lauch': (context) => SplashScreen(),
+        '/lauch': (context) => const SplashScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
