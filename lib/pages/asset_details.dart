@@ -5,6 +5,7 @@ import 'dart:convert';
 import '../widgets/main_app_bar.dart';
 import '../baseUrl.dart';
 import '../widgets/drawer_widget.dart';
+import 'counter_page.dart'; // import the counter page
 
 class AssetDetailsPage extends StatefulWidget {
   final String AssetID;
@@ -90,6 +91,7 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
                                   _buildDetailRow('Criticality', _assetDetails!['Criticality'].toString()),
                                   _buildDetailRow('Functional Location', _assetDetails!['FunctionalLocation'].toString()),
                                   _buildDetailRow('Current Lifecycle State', _assetDetails!['CurrentLifecycleState'].toString()),
+                                  const SizedBox(height: 24),
                                 ],
                               ),
                             ),

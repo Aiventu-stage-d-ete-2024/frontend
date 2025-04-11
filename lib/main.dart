@@ -4,6 +4,7 @@ import 'pages/home_page.dart';
 import 'pages/asset_page.dart';
 import 'pages/mr_page.dart';
 import 'pages/signup_page.dart';
+import 'pages/counter_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/assets': (context) => const AssetPage(),
         '/maintenancerequests': (context) => const MaintenancePage(),
+        '/counters': (context) => const CounterPage(),
         '/home': (context) => const MyHomePage(title: 'Finance & Operations'),
         '/signup': (context) => const SignupPage(),
       },

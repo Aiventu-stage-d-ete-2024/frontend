@@ -48,6 +48,13 @@ class DrawerWidget extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/maintenancerequests');
             },
           ),
+          /* ListTile(
+            title: const Text('Counters'),
+            onTap: () {
+              Navigator.pop(context); 
+              Navigator.pushReplacementNamed(context, '/counters');
+            },
+          ), */
         ],
       ),
     );

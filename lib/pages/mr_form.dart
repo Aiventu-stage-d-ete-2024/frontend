@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:test/pages/mr_details.dart';
 import '../pages/mr_page.dart';
 import '../widgets/main_app_bar.dart';
 import '../widgets/drawer_widget.dart';
@@ -126,12 +127,21 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
 
     if (response.statusCode == 200) {
       //print('Response body: ${response.body}');
-      _navigateToMaintenancePage();
+      _navigateToMRDetailsPage();
     } else {
       //print('Response body: ${response.body}');
       _showErrorDialog('Failed to update request');
     }
   }
+
+  void _navigateToMRDetailsPage() {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => MRDetailsPage(RequestID: _requestIDController.text),
+    ),
+  );
+}
 
   Map<String, dynamic> _buildRequestPayload() {
     return {
@@ -140,7 +150,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
       'Description': _descriptionController.text,
       'ServiceLevel': int.tryParse(_serviceLevelController.text) ?? 0,
       'FunctionalLocation': _functionalLocationController.text,
-      'Asset': selectedAsset,
+      'AssetID': selectedAsset,
       'JobType': _jobTypeController.text,
       'JobVariant': _jobVariantController.text,
       'JobTrade': _jobTradeController.text,
@@ -160,6 +170,8 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
       (Route<dynamic> route) => false,
     );
   }
+
+
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -190,7 +202,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
     builder: (BuildContext context, Widget? child) {
       return Theme(
         data: ThemeData.light().copyWith(
-          primaryColor: const Color(0xFF3665DB), // Primary color for the scheme
+          primaryColor: const Color(0xFF3665DB),
           dialogBackgroundColor: Colors.white, colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)).copyWith(secondary: const Color(0xFF3665DB)), // Background color of the dialog
         ),
         child: child!,
@@ -205,9 +217,9 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            primaryColor: const Color(0xFF3665DB), // Header color
-            dialogBackgroundColor: Colors.white, // Background color of the dialog
-            colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)), // Primary color for the scheme
+            primaryColor: const Color(0xFF3665DB),
+            dialogBackgroundColor: Colors.white,
+            colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)),
           ),
           child: child!,
         );
@@ -278,7 +290,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
                     onChanged: (value) {
                       setState(() {
                         selectedAsset = value;
-                        //print('Selected Asset: $selectedAsset');
+                        print('Selected Asset: $selectedAsset');
                       });
                     },
                     dropdownColor: Colors.white,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:test/pages/asset_details.dart';
 import 'dart:convert';
 import '../baseURL.dart';
 import '../pages/asset_page.dart';
@@ -119,7 +120,7 @@ void initState() {
     if (response.statusCode == 200) {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const AssetPage()),
+        MaterialPageRoute(builder: (context) => AssetDetailsPage(AssetID: _assetIdController.text)),
         (Route<dynamic> route) => false,
       );
     } else {
