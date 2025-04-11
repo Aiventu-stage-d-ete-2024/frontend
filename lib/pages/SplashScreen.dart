@@ -69,11 +69,11 @@ class _SplashScreenState extends State<SplashScreen>
                   opacity: _fadeInLogo.value,
                   child: Image.asset(
                     'assets/images/aiventu_logo.png',
-                    height: 180,
+                    height: 200,
                   ),
                 ),
                 const SizedBox(height: 30),
-                Opacity(
+                /* Opacity(
                   opacity: _fadeInText.value,
                   child: Column(
                     children: [
@@ -87,7 +87,7 @@ class _SplashScreenState extends State<SplashScreen>
                       ),
                     ],
                   ),
-                ),
+                ), */
               ],
             ),
           );
