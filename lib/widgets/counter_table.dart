@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../pages/counter_details.dart';
-import 'package:intl/intl.dart';
 
 class CountersTable extends StatelessWidget {
   final List<dynamic> counters;

@@ -5,7 +5,7 @@ import 'dart:convert';
 import '../widgets/main_app_bar.dart';
 import '../baseUrl.dart';
 import '../widgets/drawer_widget.dart';
-import 'counter_page.dart'; // import the counter page
+// import the counter page
 
 class AssetDetailsPage extends StatefulWidget {
   final String AssetID;
