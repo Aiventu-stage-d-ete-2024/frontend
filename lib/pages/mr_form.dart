@@ -210,35 +210,33 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
     },
   );
 
-    if (pickedDate != null) {
-      TimeOfDay? pickedTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay.now(),
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: ThemeData.light().copyWith(
-            primaryColor: const Color(0xFF3665DB),
-            dialogBackgroundColor: Colors.white,
-            colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)),
-          ),
-          child: child!,
-        );
-      },
-    );
+    TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    builder: (BuildContext context, Widget? child) {
+      return Theme(
+        data: ThemeData.light().copyWith(
+          primaryColor: const Color(0xFF3665DB),
+          dialogBackgroundColor: Colors.white,
+          colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)),
+        ),
+        child: child!,
+      );
+    },
+  );
 
-      if (pickedTime != null) {
-        DateTime finalDateTime = DateTime(
-          pickedDate.year,
-          pickedDate.month,
-          pickedDate.day,
-          pickedTime.hour,
-          pickedTime.minute,
-        );
+    if (pickedTime != null) {
+      DateTime finalDateTime = DateTime(
+        pickedDate!.year,
+        pickedDate!.month,
+        pickedDate!.day,
+        pickedTime!.hour,
+        pickedTime!.minute,
+      );
 
-        _actualStartController.text = DateFormat('yyyy-MM-dd HH:mm').format(finalDateTime);
-      }
+      _actualStartController.text = DateFormat('yyyy-MM-dd HH:mm').format(finalDateTime);
     }
-  }
+    }
 
   @override
   Widget build(BuildContext context) {

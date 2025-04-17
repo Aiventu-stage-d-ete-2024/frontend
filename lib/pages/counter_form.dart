@@ -183,10 +183,8 @@ class _CounterFormState extends State<CounterForm> {
     },
   );
 
-    if (pickedDate != null) {
-      _registeredDateController.text = DateFormat('yyyy-MM-dd').format(pickedDate);
+    _registeredDateController.text = DateFormat('yyyy-MM-dd').format(pickedDate!);
     }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -203,9 +201,10 @@ class _CounterFormState extends State<CounterForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomTextFormField(labelText: 'Counter ID', controller: _counterIDController),
-                  const SizedBox(height: 20.0),
+                  /* CustomTextFormField(labelText: 'Counter ID', controller: _counterIDController),
+                  const SizedBox(height: 20.0), */
                   DropdownButtonFormField(
+                  isExpanded: true,
                   value: selectedAsset,
                   decoration: InputDecoration(
                   labelText: 'Select An Asset',
