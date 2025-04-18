@@ -18,7 +18,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
+  final CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   List<dynamic> _maintenanceRequests = [];
@@ -61,14 +61,14 @@ class _MyHomePageState extends State<MyHomePage> {
       return Theme(
         data: Theme.of(context).copyWith(
           dialogBackgroundColor: Colors.white,
-          colorScheme: ColorScheme.light(
+          colorScheme: const ColorScheme.light(
             primary: Color(0xFF3665DB),
             onPrimary: Colors.white,
             onSurface: Colors.black,
           ),
           textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(
-              foregroundColor: Color(0xFF3665DB),
+              foregroundColor: const Color(0xFF3665DB),
             ),
           ),
         ),
