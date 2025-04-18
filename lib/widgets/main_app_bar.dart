@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/pages/signin_page.dart';
+import 'package:test/pages/notifications_page.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({super.key});
@@ -43,7 +44,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
         Container(
           margin: EdgeInsets.zero,
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NotificationsPage()),
+              );
+            },
             icon: const Icon(Icons.notifications, color: Colors.white),
             padding: EdgeInsets.zero,
           ),
