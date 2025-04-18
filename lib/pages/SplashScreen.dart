@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
 
     _controller = AnimationController(
-      duration: const Duration(seconds: 6), // ⬅️ Longer total animation
+      duration: const Duration(seconds: 6),
       vsync: this,
     );
 
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen>
     _fadeInText = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.5, 0.95, curve: Curves.easeIn), // ⬅️ Extended duration
+        curve: const Interval(0.5, 0.95, curve: Curves.easeIn),
       ),
     );
 
