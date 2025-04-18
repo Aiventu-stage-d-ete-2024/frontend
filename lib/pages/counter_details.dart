@@ -8,8 +8,9 @@ import '../widgets/counter_app_bar_body.dart';
 
 class CounterDetailsPage extends StatefulWidget {
   final String CounterID;
+  final String AssetID;
 
-  const CounterDetailsPage({super.key, required this.CounterID});
+  const CounterDetailsPage({super.key, required this.CounterID, required this.AssetID});
 
   @override
   _CounterDetailsPageState createState() => _CounterDetailsPageState();
@@ -56,7 +57,7 @@ class _CounterDetailsPageState extends State<CounterDetailsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  counterAppBarBody(context, isCounterDetailsPage: true, counterDetails: _counterDetails),
+                  counterAppBarBody(context, isCounterDetailsPage: true, counterDetails: _counterDetails, AssetID: widget.AssetID),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(

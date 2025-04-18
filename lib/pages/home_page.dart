@@ -50,6 +50,42 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<void> _pickYear(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _focusedDay,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+      initialDatePickerMode: DatePickerMode.year,
+    builder: (BuildContext context, Widget? child) {
+      return Theme(
+        data: Theme.of(context).copyWith(
+          dialogBackgroundColor: Colors.white,
+          colorScheme: ColorScheme.light(
+            primary: Color(0xFF3665DB),
+            onPrimary: Colors.white,
+            onSurface: Colors.black,
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              foregroundColor: Color(0xFF3665DB),
+            ),
+          ),
+        ),
+        child: child!,
+      );
+    },
+  );
+
+    if (picked != null) {
+      setState(() {
+        _focusedDay = picked;
+        _selectedDay = picked;
+      });
+      _fetchMaintenanceRequests(picked);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,14 +100,35 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 16.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        DateFormat('MMMM yyyy').format(_focusedDay),
+                        style: const TextStyle(
+                          color: Color(0xFF3665DB),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.calendar_today, color: Color(0xFF3665DB)),
+                        onPressed: () => _pickYear(context),
+                        tooltip: 'Jump to Year',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16.0),
                   TableCalendar(
-                    firstDay: DateTime.utc(2010, 10, 16),
-                    lastDay: DateTime.utc(2030, 3, 14),
+                    firstDay: DateTime.utc(2000, 1, 1),
+                    lastDay: DateTime.utc(2100, 1, 1),
                     focusedDay: _focusedDay,
                     calendarFormat: _calendarFormat,
-                    selectedDayPredicate: (day) {
-                      return isSameDay(_selectedDay, day);
+                    availableCalendarFormats: const {
+                      CalendarFormat.month: 'Month',
                     },
+                    selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
                     onDaySelected: (selectedDay, focusedDay) {
                       if (!isSameDay(_selectedDay, selectedDay)) {
                         setState(() {
@@ -81,16 +138,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         _fetchMaintenanceRequests(selectedDay);
                       }
                     },
-                    onFormatChanged: (format) {
-                      if (_calendarFormat != format) {
-                        setState(() {
-                          _calendarFormat = format;
-                        });
-                      }
-                    },
                     onPageChanged: (focusedDay) {
                       _focusedDay = focusedDay;
                     },
+                    headerStyle: const HeaderStyle(
+                      formatButtonVisible: false,
+                      titleCentered: true,
+                      titleTextStyle: TextStyle(
+                        color: Colors.transparent,
+                        fontSize: 0, 
+                      ),
+                    ),
                     calendarStyle: CalendarStyle(
                       todayDecoration: BoxDecoration(
                         color: Colors.transparent,
@@ -108,6 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       outsideDaysVisible: false,
                     ),
                   ),
+
                   const SizedBox(height: 16.0),
                   Text(
                     'Maintenance Requests on ${DateFormat('MMMM dd, yyyy').format(_selectedDay!)}',

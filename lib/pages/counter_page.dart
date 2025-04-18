@@ -75,7 +75,7 @@ class _CounterPageState extends State<CounterPage> {
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                      counterAppBarBody(context, isCounterDetailsPage: false),
+                      counterAppBarBody(context, isCounterDetailsPage: false, AssetID: widget.assetId!),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -87,7 +87,7 @@ class _CounterPageState extends State<CounterPage> {
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
                             const SizedBox(height: 16.0),
-                            CountersTable(counters: _counters),
+                            CountersTable(counters: _counters, AssetID: widget.assetId!),
                           ],
                         ),
                       ),

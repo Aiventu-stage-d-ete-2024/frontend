@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test/pages/asset_details.dart';
 import '../pages/counter_form.dart';
 import '../pages/counter_page.dart';
 import '../pages/home_page.dart';
@@ -21,6 +22,7 @@ Widget counterAppBarBody(
   BuildContext context, {
   required bool isCounterDetailsPage,
   Map<String, dynamic>? counterDetails,
+  String? AssetID,
 }) {
   return Container(
     color: Colors.white,
@@ -33,14 +35,14 @@ Widget counterAppBarBody(
             if (isCounterDetailsPage) {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => const CounterPage()),
+                MaterialPageRoute(builder: (context) => CounterPage(assetId: AssetID)),
                 (Route<dynamic> route) => false,
               );
             } else {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const MyHomePage(title: "Finance & Operations"),
+                  builder: (context) => AssetDetailsPage(AssetID: AssetID!),
                 ),
                 (Route<dynamic> route) => false,
               );
@@ -59,6 +61,7 @@ Widget counterAppBarBody(
                   builder: (context) => CounterForm(
                     isUpdate: true,
                     counterDetails: counterDetails,
+                    assetId: AssetID,
                   ),
                 ),
                 (Route<dynamic> route) => false,
@@ -73,7 +76,7 @@ Widget counterAppBarBody(
             onPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => const CounterForm()),
+                MaterialPageRoute(builder: (context) => CounterForm(assetId: AssetID)),
                 (Route<dynamic> route) => false,
               );
             },
@@ -106,7 +109,7 @@ Widget counterAppBarBody(
                             Navigator.of(context).pop();
                             Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(builder: (context) => const CounterPage()),
+                              MaterialPageRoute(builder: (context) => CounterPage(assetId: AssetID)),
                               (Route<dynamic> route) => false,
                             );
                           } catch (e) {

@@ -11,8 +11,9 @@ import '../widgets/counter_app_bar_body.dart';
 class CounterForm extends StatefulWidget {
   final bool isUpdate;
   final Map<String, dynamic>? counterDetails;
+  final String? assetId;
 
-  const CounterForm({super.key, this.isUpdate = false, this.counterDetails});
+  const CounterForm({super.key, this.isUpdate = false, this.counterDetails, this.assetId});
 
   @override
   _CounterFormState createState() => _CounterFormState();
@@ -41,6 +42,9 @@ class _CounterFormState extends State<CounterForm> {
     fetchAssets();
     if (widget.isUpdate && widget.counterDetails != null) {
       _populateFields();
+    }
+    if (widget.assetId != null) {
+      selectedAsset = widget.assetId;
     }
   }
 
@@ -141,7 +145,7 @@ class _CounterFormState extends State<CounterForm> {
   void _navigateToCountersPage() {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => const CounterPage()),
+      MaterialPageRoute(builder: (context) => CounterPage(assetId: selectedAsset ?? widget.assetId)),
       (Route route) => false,
     );
   }

@@ -228,10 +228,10 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
     if (pickedTime != null) {
       DateTime finalDateTime = DateTime(
         pickedDate!.year,
-        pickedDate!.month,
-        pickedDate!.day,
-        pickedTime!.hour,
-        pickedTime!.minute,
+        pickedDate.month,
+        pickedDate.day,
+        pickedTime.hour,
+        pickedTime.minute,
       );
 
       _actualStartController.text = DateFormat('yyyy-MM-dd HH:mm').format(finalDateTime);

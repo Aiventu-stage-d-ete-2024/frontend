@@ -3,8 +3,9 @@ import '../pages/counter_details.dart';
 
 class CountersTable extends StatelessWidget {
   final List<dynamic> counters;
+  final String AssetID;
 
-  const CountersTable({super.key, required this.counters});
+  const CountersTable({super.key, required this.counters, required this.AssetID});
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +32,21 @@ class CountersTable extends StatelessWidget {
         ],
         rows: counters.map<DataRow>((counter) {
           final counterID = counter['_id'];
+          final AssetID = counter['Asset'];
+          print('Counter ID: $counterID');
+          print('Asset ID: $AssetID');
           return DataRow(
             cells: [
-              //DataCell(Text(counter['CounterID']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID)),
-              DataCell(Text(counter['Asset']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID)),
-              DataCell(Text(counter['FunctionalLocation']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID)),
-              DataCell(Text(counter['Counter']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID)),
-              DataCell(Text(counter['CounterReset']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID)),
-              //DataCell(Text(_formatDate(counter['Registered']) ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID)),
-              DataCell(Text(counter['Value']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID)),
-              DataCell(Text(counter['Unit']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID)),
-              //DataCell(Text(counter['AggregatedValue']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID)),
-              //DataCell(Text(counter['Totals']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID)),
+              //DataCell(Text(counter['CounterID']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              DataCell(Text(counter['Asset']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              DataCell(Text(counter['FunctionalLocation']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              DataCell(Text(counter['Counter']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              DataCell(Text(counter['CounterReset']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              //DataCell(Text(_formatDate(counter['Registered']) ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              DataCell(Text(counter['Value']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              DataCell(Text(counter['Unit']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              //DataCell(Text(counter['AggregatedValue']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              //DataCell(Text(counter['Totals']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
             ],
           );
         }).toList(),
@@ -50,11 +54,11 @@ class CountersTable extends StatelessWidget {
     );
   }
 
-  void _navigateToCounterDetails(BuildContext context, String counterID) {
+  void _navigateToCounterDetails(BuildContext context, String counterID, String AssetID) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CounterDetailsPage(CounterID: counterID),
+        builder: (context) => CounterDetailsPage(CounterID: counterID, AssetID: AssetID),
       ),
     );
   }
