@@ -78,11 +78,15 @@ class _AssetPageState extends State<AssetPage> {
                         height: 30,
                         child: TextField(
                           textAlignVertical: TextAlignVertical.center,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
                             hintText: 'Filter',
-                            prefixIcon: Icon(Icons.search),
-                            contentPadding: EdgeInsets.symmetric(vertical: 10),
+                            prefixIcon: const Icon(Icons.search),
+                            focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(vertical: 10),
                           ),
                           onChanged: (value) {
                             setState(() {

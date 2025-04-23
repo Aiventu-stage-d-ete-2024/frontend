@@ -87,7 +87,7 @@ class _CounterPageState extends State<CounterPage> {
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
                             const SizedBox(height: 16.0),
-                            const Row(
+                            Row(
                           children: [
                             SizedBox(
                               width: 200,
@@ -95,10 +95,14 @@ class _CounterPageState extends State<CounterPage> {
                               child: TextField(
                                 textAlignVertical: TextAlignVertical.center,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
+                                  border: const OutlineInputBorder(),
                                   hintText: 'Filter',
-                                  prefixIcon: Icon(Icons.search),
-                                  contentPadding: EdgeInsets.symmetric(vertical: 10),
+                                  prefixIcon: const Icon(Icons.search),
+                                  focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(vertical: 10),
                                 ),
                               ),
                             ),
