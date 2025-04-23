@@ -202,8 +202,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
     builder: (BuildContext context, Widget? child) {
       return Theme(
         data: ThemeData.light().copyWith(
-          primaryColor: const Color(0xFF3665DB),
-          dialogBackgroundColor: Colors.white, colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)).copyWith(secondary: const Color(0xFF3665DB)), // Background color of the dialog
+          primaryColor: const Color(0xFF3665DB), colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)).copyWith(secondary: const Color(0xFF3665DB)), dialogTheme: DialogThemeData(backgroundColor: Colors.white), // Background color of the dialog
         ),
         child: child!,
       );
@@ -217,8 +216,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
       return Theme(
         data: ThemeData.light().copyWith(
           primaryColor: const Color(0xFF3665DB),
-          dialogBackgroundColor: Colors.white,
-          colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)),
+          colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)), dialogTheme: DialogThemeData(backgroundColor: Colors.white),
         ),
         child: child!,
       );

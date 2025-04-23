@@ -60,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
     builder: (BuildContext context, Widget? child) {
       return Theme(
         data: Theme.of(context).copyWith(
-          dialogBackgroundColor: Colors.white,
           colorScheme: const ColorScheme.light(
             primary: Color(0xFF3665DB),
             onPrimary: Colors.white,
@@ -70,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextButton.styleFrom(
               foregroundColor: const Color(0xFF3665DB),
             ),
-          ),
+          ), dialogTheme: DialogThemeData(backgroundColor: Colors.white),
         ),
         child: child!,
       );
