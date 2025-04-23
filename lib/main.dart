@@ -6,8 +6,11 @@ import 'pages/mr_page.dart';
 import 'pages/notifications_page.dart';
 import 'pages/signup_page.dart';
 import 'pages/counter_page.dart';
+import 'services/socketService.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SocketService.initialize();
   runApp(const MyApp());
 }
 
