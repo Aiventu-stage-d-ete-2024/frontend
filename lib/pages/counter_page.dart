@@ -19,11 +19,19 @@ class CounterPage extends StatefulWidget {
 class _CounterPageState extends State<CounterPage> {
   List<dynamic> _counters = [];
   bool _isLoading = true;
+  TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
     _fetchCounters();
+    _searchController.addListener(() {
+      setState(() {
+        _searchQuery = _searchController.text;
+      });
+      _fetchCounters();
+    });
   }
 
   Future<void> _fetchCounters() async {
@@ -34,7 +42,9 @@ class _CounterPageState extends State<CounterPage> {
       return;
     }
 
-    final url = Uri.parse('${baseUrl}counters/Asset/${widget.assetId}');
+    final url = Uri.parse(
+      '${baseUrl}counters/Asset/${widget.assetId}/search?query=$_searchQuery',
+    );
 
     try {
       final response = await http.get(url);
@@ -75,7 +85,8 @@ class _CounterPageState extends State<CounterPage> {
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                      counterAppBarBody(context, isCounterDetailsPage: false, AssetID: widget.assetId!),
+                      counterAppBarBody(context,
+                          isCounterDetailsPage: false, AssetID: widget.assetId!),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -88,28 +99,31 @@ class _CounterPageState extends State<CounterPage> {
                             ),
                             const SizedBox(height: 16.0),
                             Row(
-                          children: [
-                            SizedBox(
-                              width: 200,
-                              height: 30,
-                              child: TextField(
-                                textAlignVertical: TextAlignVertical.center,
-                                decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  hintText: 'Filter',
-                                  prefixIcon: const Icon(Icons.search),
-                                  focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
+                              children: [
+                                SizedBox(
+                                  width: 200,
+                                  height: 30,
+                                  child: TextField(
+                                    controller: _searchController,
+                                    textAlignVertical: TextAlignVertical.center,
+                                    decoration: InputDecoration(
+                                      border: const OutlineInputBorder(),
+                                      hintText: 'Filter',
+                                      prefixIcon: const Icon(Icons.search),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFF3665DB), width: 2.0),
+                                      ),
+                                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                                    ),
                                   ),
-                                  contentPadding: const EdgeInsets.symmetric(vertical: 10),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 16.0),
-                            CountersTable(counters: _counters, AssetID: widget.assetId!),
+                            const SizedBox(height: 16.0),
+                            CountersTable(
+                                counters: _counters, AssetID: widget.assetId!),
                           ],
                         ),
                       ),
