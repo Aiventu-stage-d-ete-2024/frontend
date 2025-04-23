@@ -21,9 +21,9 @@ class CountersTable extends StatelessWidget {
         columns: const [
           //DataColumn(label: Text('Counter ID')),
           DataColumn(label: Text('Asset')),
-          DataColumn(label: Text('Functional Location')),
+          //DataColumn(label: Text('Functional Location')),
           DataColumn(label: Text('Counter')),
-          DataColumn(label: Text('CounterReset')),
+          //DataColumn(label: Text('CounterReset')),
           //DataColumn(label: Text('Registered Date')),
           DataColumn(label: Text('Value')),
           DataColumn(label: Text('Unit')),
@@ -39,9 +39,9 @@ class CountersTable extends StatelessWidget {
             cells: [
               //DataCell(Text(counter['CounterID']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
               DataCell(Text(counter['Asset']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
-              DataCell(Text(counter['FunctionalLocation']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              //DataCell(Text(counter['FunctionalLocation']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
               DataCell(Text(counter['Counter']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
-              DataCell(Text(counter['CounterReset']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              //DataCell(Text(counter['CounterReset']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
               //DataCell(Text(_formatDate(counter['Registered']) ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
               DataCell(Text(counter['Value']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
               DataCell(Text(counter['Unit']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
