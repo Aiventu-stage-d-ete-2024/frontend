@@ -14,6 +14,9 @@ class SocketService {
       'transports': ['websocket'],
       'autoConnect': true,
       'reconnection': true,
+      'reconnectionAttempts': -1,
+      'reconnectionDelay': 2000,
+      'reconnectionDelayMax': 5000,
     });
 
     _socket!.onConnect((_) {
