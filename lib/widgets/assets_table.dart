@@ -4,44 +4,19 @@ import 'dart:convert';
 import '../baseURL.dart';
 import '../pages/asset_details.dart';
 
-class AssetTable extends StatefulWidget {
-  const AssetTable({super.key});
+class AssetTable extends StatelessWidget {
+  final List<dynamic> assets;
+  final bool isLoading;
 
-  @override
-  _AssetTableState createState() => _AssetTableState();
-}
-
-class _AssetTableState extends State<AssetTable> {
-  List<dynamic> _assets = [];
-  bool _isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchAssets();
-  }
-
-  Future<void> _fetchAssets() async {
-    final url = Uri.parse('${baseUrl}assets');
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      setState(() {
-        _assets = data['assets'];
-        _isLoading = false;
-      });
-    } else {
-      setState(() {
-        _isLoading = false;
-      });
-      throw Exception('Failed to load assets');
-    }
-  }
+  const AssetTable({
+    super.key,
+    required this.assets,
+    required this.isLoading,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return _isLoading
+    return isLoading
         ? const Center(child: CircularProgressIndicator())
         : SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -50,7 +25,7 @@ class _AssetTableState extends State<AssetTable> {
                 DataColumn(label: Text('Asset ID')),
                 DataColumn(label: Text('Name')),
               ],
-              rows: _assets.map<DataRow>((asset) {
+              rows: assets.map<DataRow>((asset) {
                 return DataRow(
                   cells: [
                     DataCell(

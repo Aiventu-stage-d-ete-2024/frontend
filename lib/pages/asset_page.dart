@@ -17,28 +17,37 @@ class AssetPage extends StatefulWidget {
 class _AssetPageState extends State<AssetPage> {
   List<dynamic> _assets = [];
   bool _isLoading = true;
+  String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
-    _fetchAssets();
+    _searchAssets('');
   }
 
-  Future<void> _fetchAssets() async {
-    final url = Uri.parse('${baseUrl}assets');
-    final response = await http.get(url);
+  Future<void> _searchAssets(String query) async {
+    final url = Uri.parse('${baseUrl}assets/search?query=$query');
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          _assets = data;
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+        throw Exception('Failed to search assets');
+      }
+    } catch (e) {
       setState(() {
-        _assets = data['assets'];
         _isLoading = false;
       });
-    } else {
-      setState(() {
-        _isLoading = false;
-      });
-      throw Exception('Failed to load assets');
+      print('Search error: $e');
     }
   }
 
@@ -49,44 +58,54 @@ class _AssetPageState extends State<AssetPage> {
       drawer: const DrawerWidget(),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
+        child: Column(
+          children: [
+            assetAppBarBody(context, isAssetDetailsPage: false),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  assetAppBarBody(context,isAssetDetailsPage: false),
-                  const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'All assets',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  const Text(
+                    'All assets',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  const SizedBox(height: 16.0),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 200,
+                        height: 30,
+                        child: TextField(
+                          textAlignVertical: TextAlignVertical.center,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Filter',
+                            prefixIcon: Icon(Icons.search),
+                            contentPadding: EdgeInsets.symmetric(vertical: 10),
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              _isLoading = true;
+                              _searchQuery = value;
+                            });
+                            _searchAssets(value);
+                          },
                         ),
-                        SizedBox(height: 16.0),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 200,
-                              height: 30,
-                              child: TextField(
-                                textAlignVertical: TextAlignVertical.center,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: 'Filter',
-                                  prefixIcon: Icon(Icons.search),
-                                  contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 16.0),
-                        AssetTable(),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16.0),
+                  AssetTable(
+                    assets: _assets,
+                    isLoading: _isLoading,
                   ),
                 ],
               ),
             ),
+          ],
+        ),
+      ),
     );
   }
 }
