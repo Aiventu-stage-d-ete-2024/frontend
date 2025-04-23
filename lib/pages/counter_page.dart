@@ -87,6 +87,24 @@ class _CounterPageState extends State<CounterPage> {
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
                             const SizedBox(height: 16.0),
+                            const Row(
+                          children: [
+                            SizedBox(
+                              width: 200,
+                              height: 30,
+                              child: TextField(
+                                textAlignVertical: TextAlignVertical.center,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: 'Filter',
+                                  prefixIcon: Icon(Icons.search),
+                                  contentPadding: EdgeInsets.symmetric(vertical: 10),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16.0),
                             CountersTable(counters: _counters, AssetID: widget.assetId!),
                           ],
                         ),

@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextButton.styleFrom(
               foregroundColor: const Color(0xFF3665DB),
             ),
-          ), dialogTheme: DialogThemeData(backgroundColor: Colors.white),
+          ), dialogTheme: const DialogThemeData(backgroundColor: Colors.white),
         ),
         child: child!,
       );
