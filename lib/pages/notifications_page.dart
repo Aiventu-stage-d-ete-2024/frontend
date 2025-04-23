@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../baseUrl.dart';
 import '../widgets/main_app_bar.dart';
+import '../widgets/drawer_widget.dart';
 
 Future<List<dynamic>> fetchNotifications() async {
   final url = Uri.parse('${baseUrl}notifications');
@@ -54,6 +55,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MainAppBar(),
+      drawer: const DrawerWidget(),
       backgroundColor: Colors.grey[100],
       body: FutureBuilder<List<dynamic>>(
         future: _notificationsFuture,
