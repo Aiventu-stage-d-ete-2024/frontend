@@ -4,6 +4,7 @@ import 'pages/asset_page.dart';
 import 'pages/SplashScreen.dart';
 import 'pages/mr_page.dart';
 import 'pages/notifications_page.dart';
+import 'pages/signin_page.dart';
 import 'pages/signup_page.dart';
 import 'pages/counter_page.dart';
 import 'services/socketService.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => const SignupPage(),
         '/lauch': (context) => const SplashScreen(),
         '/notifications': (context) => const NotificationsPage(),
+        '/signin': (context) => const SigninPage(),
       },
       debugShowCheckedModeBanner: false,
     );
