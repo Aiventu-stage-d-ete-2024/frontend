@@ -37,16 +37,16 @@ class CountersTable extends StatelessWidget {
           print('Asset ID: $AssetID');
           return DataRow(
             cells: [
-              //DataCell(Text(counter['CounterID']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
-              DataCell(Text(counter['Asset']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
-              //DataCell(Text(counter['FunctionalLocation']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
-              DataCell(Text(counter['Counter']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
-              //DataCell(Text(counter['CounterReset']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
-              //DataCell(Text(_formatDate(counter['Registered']) ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
-              DataCell(Text(counter['Value']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
-              DataCell(Text(counter['Unit']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
-              //DataCell(Text(counter['AggregatedValue']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
-              //DataCell(Text(counter['Totals']?.toString() ?? 'N/A'), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              //DataCell(Text(counter['CounterID']?.toString() ?? ''), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              DataCell(Text(counter['Asset']?.toString() ?? ''), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              //DataCell(Text(counter['FunctionalLocation']?.toString() ?? ''), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              DataCell(Text(counter['Counter']?.toString() ?? ''), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              //DataCell(Text(counter['CounterReset']?.toString() ?? ''), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              //DataCell(Text(_formatDate(counter['Registered']) ?? ''), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              DataCell(Text(counter['Value']?.toString() ?? ''), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              DataCell(Text(counter['Unit']?.toString() ?? ''), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              //DataCell(Text(counter['AggregatedValue']?.toString() ?? ''), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
+              //DataCell(Text(counter['Totals']?.toString() ?? ''), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
             ],
           );
         }).toList(),

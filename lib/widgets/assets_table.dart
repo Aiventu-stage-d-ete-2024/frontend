@@ -30,7 +30,7 @@ class AssetTable extends StatelessWidget {
                         onTap: () {
                           _navigateToAssetDetails(context, asset['AssetID']);
                         },
-                        child: Text(asset['AssetID'].toString()),
+                        child: Text(asset['AssetID']?.toString() ?? ''),
                       ),
                     ),
                     DataCell(
@@ -38,7 +38,7 @@ class AssetTable extends StatelessWidget {
                         onTap: () {
                           _navigateToAssetDetails(context, asset['AssetID']);
                         },
-                        child: Text(asset['Name'].toString()),
+                        child: Text(asset['Name']?.toString() ?? ''),
                       ),
                     ),
                   ],

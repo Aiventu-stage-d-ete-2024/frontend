@@ -31,11 +31,11 @@ class MaintenanceRequestsTable extends StatelessWidget {
             cells: [
               DataCell(GestureDetector(
                 onTap: () => _navigateToMRDetails(context, request['RequestID']),
-                child: Text(request['RequestID'].toString()),
+                child: Text(request['RequestID']?.toString()?? ''),
               )),
               DataCell(GestureDetector(
                 onTap: () => _navigateToMRDetails(context, request['RequestID']),
-                child: Text(request['RequestType'].toString()),
+                child: Text(request['RequestType']?.toString()?? ''),
               )),
               DataCell(GestureDetector(
                 onTap: () => _navigateToMRDetails(context, request['RequestID']),
@@ -43,7 +43,7 @@ class MaintenanceRequestsTable extends StatelessWidget {
               )),
               DataCell(GestureDetector(
                 onTap: () => _navigateToMRDetails(context, request['RequestID']),
-                child: Text(request['Description'].toString()),
+                child: Text(request['Description']?.toString()?? ''),
               )),
             ],
           );
