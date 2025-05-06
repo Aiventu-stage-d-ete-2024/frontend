@@ -32,6 +32,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
   final TextEditingController _startedByController = TextEditingController();
   final TextEditingController _responsibleGroupController = TextEditingController();
   final TextEditingController _responsibleController = TextEditingController();
+  final TextEditingController _workOrderController = TextEditingController();
   final TextEditingController _currentLifecycleStateController = TextEditingController();
   final TextEditingController _numberOfFaultsController = TextEditingController();
   
@@ -62,6 +63,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
     _startedByController.text = details['StartedByWorker']?.toString() ?? '';
     _responsibleGroupController.text = details['ResponsibleWorkerGroup']?.toString() ?? '';
     _responsibleController.text = details['ResponsibleWorker']?.toString() ?? '';
+    _workOrderController.text = details['WorkOrder']?.toString() ?? '';
     _currentLifecycleStateController.text = details['CurrentLifecycleState']?.toString() ?? '';
     _numberOfFaultsController.text = details['NumberOfFaults']?.toString() ?? '';
   }
@@ -79,6 +81,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
     _startedByController.dispose();
     _responsibleGroupController.dispose();
     _responsibleController.dispose();
+    _workOrderController.dispose();
     _currentLifecycleStateController.dispose();
     _numberOfFaultsController.dispose();
     _actualStartController.dispose();
@@ -158,6 +161,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
       'StartedByWorker': _startedByController.text,
       'ResponsibleWorkerGroup': _responsibleGroupController.text,
       'ResponsibleWorker': _responsibleController.text,
+      'WorkOrder': _workOrderController.text,
       'CurrentLifecycleState': _currentLifecycleStateController.text,
       'NumberOfFaults': int.tryParse(_numberOfFaultsController.text) ?? 0,
     };
@@ -314,6 +318,8 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
                   CustomTextFormField(labelText: 'Responsible Worker Group', controller: _responsibleGroupController),
                   const SizedBox(height: 20.0),
                   CustomTextFormField(labelText: 'Responsible Worker', controller: _responsibleController),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(labelText: 'Work Order', controller: _workOrderController),
                   const SizedBox(height: 20.0),
                   CustomTextFormField(labelText: 'Current Lifecycle State', controller: _currentLifecycleStateController),
                   const SizedBox(height: 20.0),

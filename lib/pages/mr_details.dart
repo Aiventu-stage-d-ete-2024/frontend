@@ -92,6 +92,7 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
                           _buildDetailRow('Started By', _mrDetails!['StartedByWorker']),
                           _buildDetailRow('Responsible Group', _mrDetails!['ResponsibleWorkerGroup']),
                           _buildDetailRow('Responsible', _mrDetails!['ResponsibleWorker']),
+                          _buildDetailRow('Work Order', _mrDetails!['WorkOrder']),
                           _buildDetailRow('Current Lifecycle State', _mrDetails!['CurrentLifecycleState']),
                           _buildDetailRow('Number Of Faults', _mrDetails!['NumberOfFaults']),
                         ],
