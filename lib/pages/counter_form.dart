@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
 import '../baseURL.dart';
 import '../pages/counter_page.dart';
 import '../widgets/main_app_bar.dart';
 import '../widgets/drawer_widget.dart';
 import '../widgets/counter_app_bar_body.dart';
+import'../models/CounterType.dart';
 
 class CounterForm extends StatefulWidget {
   final bool isUpdate;
@@ -33,9 +35,9 @@ class _CounterFormState extends State<CounterForm> {
 
   List assets = [];
   String? selectedAsset;
-
+  String? selectedCounterType;
   Map<String, String> assetFunctionalLocations = {};
- 
+
   @override
   void initState() {
     super.initState();
@@ -46,12 +48,14 @@ class _CounterFormState extends State<CounterForm> {
     if (widget.assetId != null) {
       selectedAsset = widget.assetId;
     }
+
+    // Set default CounterType
+    selectedCounterType = CounterType[0]; // Default value
   }
 
   void _populateFields() {
     final details = widget.counterDetails!;
     _counterIDController.text = details['CounterID']?.toString() ?? '';
-    //_assetController.text = details['Asset']?.toString() ?? '';
     selectedAsset = details['Asset'];
     _functionalLocationController.text = details['FunctionalLocation']?.toString() ?? '';
     _counterNameController.text = details['Counter']?.toString() ?? '';
@@ -61,6 +65,7 @@ class _CounterFormState extends State<CounterForm> {
     _unitController.text = details['Unit']?.toString() ?? '';
     _aggregatedValueController.text = details['AggregatedValue']?.toString() ?? '';
     _totalsController.text = details['Totals']?.toString() ?? '';
+    selectedCounterType = details['CounterType']?.toString() ?? CounterType[0];
   }
 
   @override
@@ -104,7 +109,6 @@ class _CounterFormState extends State<CounterForm> {
       headers: {'Content-Type': 'application/json'},
       body: json.encode(_buildCounterPayload()),
     );
-
     if (response.statusCode == 201) {
       _navigateToCountersPage();
     } else {
@@ -119,7 +123,6 @@ class _CounterFormState extends State<CounterForm> {
       headers: {'Content-Type': 'application/json'},
       body: json.encode(_buildCounterPayload()),
     );
-
     if (response.statusCode == 200) {
       _navigateToCountersPage();
     } else {
@@ -137,6 +140,7 @@ class _CounterFormState extends State<CounterForm> {
       'Registered': _registeredDateController.text,
       'Value': double.tryParse(_valueController.text) ?? 0.0,
       'Unit': _unitController.text,
+      'CounterType': selectedCounterType,
       'AggregatedValue': double.tryParse(_aggregatedValueController.text) ?? 0.0,
       'Totals': double.tryParse(_totalsController.text) ?? 0.0,
     };
@@ -177,17 +181,21 @@ class _CounterFormState extends State<CounterForm> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
       builder: (BuildContext context, Widget? child) {
-      return Theme(
-        data: ThemeData.light().copyWith(
-          primaryColor: const Color(0xFF3665DB), colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB)).copyWith(secondary: const Color(0xFF3665DB)), dialogTheme: const DialogThemeData(backgroundColor: Colors.white), // Background color of the dialog
-        ),
-        child: child!,
-      );
-    },
-  );
-
-    _registeredDateController.text = DateFormat('yyyy-MM-dd').format(pickedDate!);
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: const Color(0xFF3665DB),
+            colorScheme: const ColorScheme.light(primary: Color(0xFF3665DB))
+                .copyWith(secondary: const Color(0xFF3665DB)),
+            dialogTheme: const DialogTheme(backgroundColor: Colors.white),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      _registeredDateController.text = DateFormat('yyyy-MM-dd').format(pickedDate);
     }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -198,35 +206,37 @@ class _CounterFormState extends State<CounterForm> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            counterAppBarBody(context, isCounterDetailsPage: true, counterDetails: widget.counterDetails),
+            counterAppBarBody(context,
+                isCounterDetailsPage: true,
+                counterDetails: widget.counterDetails),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  /* CustomTextFormField(labelText: 'Counter ID', controller: _counterIDController),
-                  const SizedBox(height: 20.0), */
                   DropdownButtonFormField(
-                  isExpanded: true,
-                  value: selectedAsset,
-                  decoration: InputDecoration(
-                  labelText: 'Select An Asset',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                    isExpanded: true,
+                    value: selectedAsset,
+                    decoration: InputDecoration(
+                      labelText: 'Select An Asset',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0)),
+                    ),
+                    items: assets.map((asset) {
+                      return DropdownMenuItem(
+                        value: asset['AssetID'],
+                        child: Text('${asset['AssetID']} : ${asset['Name']}'),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedAsset = value as String?;
+                        _functionalLocationController.text =
+                            assetFunctionalLocations[value] ?? '';
+                      });
+                    },
+                    dropdownColor: Colors.white,
                   ),
-                  items: assets.map((asset) {
-                  return DropdownMenuItem(
-                    value: asset['AssetID'],
-                    child: Text('${asset['AssetID']} : ${asset['Name']}'),
-                  );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedAsset = value as String?;
-                      _functionalLocationController.text = assetFunctionalLocations[value] ?? '';
-                    });
-                  },
-                  dropdownColor: Colors.white,
-                ),
                   const SizedBox(height: 20.0),
                   CustomTextFormField(
                     labelText: 'Functional Location',
@@ -234,9 +244,51 @@ class _CounterFormState extends State<CounterForm> {
                     readOnly: true,
                   ),
                   const SizedBox(height: 20.0),
-                  CustomTextFormField(labelText: 'Counter Name', controller: _counterNameController),
+                  CustomTextFormField(
+                      labelText: 'Counter Name',
+                      controller: _counterNameController),
                   const SizedBox(height: 20.0),
-                  CustomTextFormField(labelText: 'Counter Reset', controller: _counterResetController),
+                  CustomTextFormField(
+                      labelText: 'Counter Reset',
+                      controller: _counterResetController),
+                  const SizedBox(height: 20.0),
+                  DropdownButtonFormField<String>(
+                    value: selectedCounterType,
+                    decoration: InputDecoration(
+                      labelText: 'Counter Type',
+                      labelStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                ),
+                floatingLabelStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF3665DB),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
+                ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                fillColor: Colors.white,
+                filled: true,
+              ),
+              dropdownColor: Colors.white,
+                    items: CounterType.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedCounterType = newValue;
+                      });
+                    },
+                  ),
                   const SizedBox(height: 20.0),
                   GestureDetector(
                     onTap: _selectDate,
@@ -248,13 +300,18 @@ class _CounterFormState extends State<CounterForm> {
                     ),
                   ),
                   const SizedBox(height: 20.0),
-                  CustomTextFormField(labelText: 'Value', controller: _valueController),
+                  CustomTextFormField(
+                      labelText: 'Value', controller: _valueController),
                   const SizedBox(height: 20.0),
-                  CustomTextFormField(labelText: 'Unit', controller: _unitController),
+                  CustomTextFormField(
+                      labelText: 'Unit', controller: _unitController),
                   const SizedBox(height: 20.0),
-                  CustomTextFormField(labelText: 'Aggregated Value', controller: _aggregatedValueController),
+                  CustomTextFormField(
+                      labelText: 'Aggregated Value',
+                      controller: _aggregatedValueController),
                   const SizedBox(height: 20.0),
-                  CustomTextFormField(labelText: 'Totals', controller: _totalsController),
+                  CustomTextFormField(
+                      labelText: 'Totals', controller: _totalsController),
                   const SizedBox(height: 20.0),
                   Align(
                     alignment: Alignment.center,
@@ -263,7 +320,8 @@ class _CounterFormState extends State<CounterForm> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF3665DB),
-                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                         textStyle: const TextStyle(fontSize: 18),
                       ),
                       child: const Text('Confirm'),
@@ -298,14 +356,21 @@ class CustomTextFormField extends StatelessWidget {
       readOnly: readOnly,
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
-        floatingLabelStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF3665DB)),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+        labelStyle: const TextStyle(
+            fontSize: 16, fontWeight: FontWeight.normal),
+        floatingLabelStyle: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF3665DB)),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
-          borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
+          borderSide: const BorderSide(
+              color: Color(0xFF3665DB), width: 2.0),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+        contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16.0, vertical: 12.0),
       ),
       style: const TextStyle(fontSize: 16),
     );
