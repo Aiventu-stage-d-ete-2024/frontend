@@ -97,7 +97,7 @@ class _CounterDetailsPageState extends State<CounterDetailsPage> {
             '$label:',
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          Text(value?.toString() ?? 'N/A'),
+          Text(value?.toString() ?? '------------'),
         ],
       ),
     );
