@@ -201,7 +201,7 @@ class _AssetFormState extends State<AssetForm> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        child: Text(widget.isUpdate ? 'Update Asset' : 'Confirm'),
+                        child: Text(widget.isUpdate ? 'Confirm' : 'Confirm'),
                       ),
                     ),
                   ],
