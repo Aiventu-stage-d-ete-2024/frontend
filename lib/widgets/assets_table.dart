@@ -16,7 +16,6 @@ class AssetTable extends StatelessWidget {
     return isLoading
         ? const Center(child: CircularProgressIndicator())
         : SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
             child: DataTable(
               columns: const [
                 DataColumn(label: Text('Asset ID')),

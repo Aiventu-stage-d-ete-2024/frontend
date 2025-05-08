@@ -18,13 +18,12 @@ class MaintenanceRequestsTable extends StatelessWidget {
     }
 
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
       child: DataTable(
         columns: const [
           DataColumn(label: Text('Request ID')),
           DataColumn(label: Text('Request Type')),
           DataColumn(label: Text('Asset')),
-          DataColumn(label: Text('Description')),
+          //DataColumn(label: Text('Description')),
         ],
         rows: maintenanceRequests.map<DataRow>((request) {
           return DataRow(
@@ -41,10 +40,10 @@ class MaintenanceRequestsTable extends StatelessWidget {
                 onTap: () => _navigateToMRDetails(context, request['RequestID']),
                 child: Text(request['Asset']?.toString() ?? ''),
               )),
-              DataCell(GestureDetector(
+              /* DataCell(GestureDetector(
                 onTap: () => _navigateToMRDetails(context, request['RequestID']),
                 child: Text(request['Description']?.toString()?? ''),
-              )),
+              )), */
             ],
           );
         }).toList(),

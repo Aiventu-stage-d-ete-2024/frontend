@@ -16,7 +16,6 @@ class CountersTable extends StatelessWidget {
     }
 
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
       child: DataTable(
         columns: const [
           //DataColumn(label: Text('Counter ID')),
