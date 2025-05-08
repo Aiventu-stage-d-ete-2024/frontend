@@ -55,12 +55,11 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
           : _mrDetails == null
               ? const Center(child: Text('Maintenance request details not found'))
               : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     mrAppBarBody(context, isMRDetailsPage: true, mrDetails: _mrDetails),
                     Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
+                      child: ListView(
+                        padding: const EdgeInsets.all(16),
                           children: [
                             const SizedBox(height: 16),
                             const Center(
@@ -74,11 +73,6 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
                                   _buildDetailCard(Icons.confirmation_number, 'Request ID', _mrDetails!['RequestID']),
                                   _buildDetailCard(Icons.category, 'Request Type', _mrDetails!['RequestType']),
                                   _buildDetailCard(Icons.description, 'Description', _mrDetails!['Description']),
@@ -102,11 +96,7 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-    );
+                      );
   }
 
   Widget _buildDetailCard(IconData icon, String title, dynamic value) {
