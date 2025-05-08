@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../baseURL.dart'; 
+import '../baseURL.dart';
 import '../pages/signin_page.dart';
 
 class SignupPage extends StatefulWidget {
@@ -15,7 +15,8 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   bool isLoading = false;
 
@@ -40,7 +41,8 @@ class _SignupPageState extends State<SignupPage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('OK', style: TextStyle(color: Color(0xFF3665DB))),
+              child:
+                  const Text('OK', style: TextStyle(color: Color(0xFF3665DB))),
             ),
           ],
         ),
@@ -86,7 +88,8 @@ class _SignupPageState extends State<SignupPage> {
                     (Route<dynamic> route) => false,
                   );
                 },
-                child: const Text('OK', style: TextStyle(color: Color(0xFF3665DB))),
+                child: const Text('OK',
+                    style: TextStyle(color: Color(0xFF3665DB))),
               ),
             ],
           ),
@@ -108,7 +111,8 @@ class _SignupPageState extends State<SignupPage> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('OK', style: TextStyle(color: Color(0xFF3665DB))),
+                child: const Text('OK',
+                    style: TextStyle(color: Color(0xFF3665DB))),
               ),
             ],
           ),
@@ -130,7 +134,8 @@ class _SignupPageState extends State<SignupPage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('OK', style: TextStyle(color: Color(0xFF3665DB))),
+              child:
+                  const Text('OK', style: TextStyle(color: Color(0xFF3665DB))),
             ),
           ],
         ),
@@ -152,12 +157,12 @@ class _SignupPageState extends State<SignupPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Color(0xFF3665DB)),
           onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SigninPage()),
-                    (Route<dynamic> route) => false,
-                  );
-                },
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const SigninPage()),
+              (Route<dynamic> route) => false,
+            );
+          },
         ),
       ),
       body: isLoading
@@ -229,7 +234,8 @@ class _SignupPageState extends State<SignupPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF3665DB),
-                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 32, vertical: 12),
                         textStyle: const TextStyle(fontSize: 18),
                       ),
                       child: const Text('Sign up'),
@@ -283,7 +289,8 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       ),
       style: const TextStyle(fontSize: 16),
     );

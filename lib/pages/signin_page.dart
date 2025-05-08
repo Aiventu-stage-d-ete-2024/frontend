@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../baseURL.dart'; 
+import '../baseURL.dart';
 import '../pages/home_page.dart';
 import '../pages/signup_page.dart';
 
@@ -53,11 +53,14 @@ class _SigninPageState extends State<SigninPage> {
                 Navigator.pop(context);
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const MyHomePage(title: "Finance & Operations")),
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const MyHomePage(title: "Finance & Operations")),
                   (Route<dynamic> route) => false,
                 );
               },
-              child: const Text('OK', style: TextStyle(color: Color(0xFF3665DB))),
+              child:
+                  const Text('OK', style: TextStyle(color: Color(0xFF3665DB))),
             ),
           ],
         ),
@@ -78,7 +81,8 @@ class _SigninPageState extends State<SigninPage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('OK', style: TextStyle(color: Color(0xFF3665DB))),
+              child:
+                  const Text('OK', style: TextStyle(color: Color(0xFF3665DB))),
             ),
           ],
         ),
@@ -136,7 +140,8 @@ class _SigninPageState extends State<SigninPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF3665DB),
-                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 32, vertical: 12),
                         textStyle: const TextStyle(fontSize: 18),
                       ),
                       child: const Text('Sign in'),
@@ -146,7 +151,8 @@ class _SigninPageState extends State<SigninPage> {
                       onTap: () {
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => const SignupPage()),
+                          MaterialPageRoute(
+                              builder: (context) => const SignupPage()),
                           (Route<dynamic> route) => false,
                         );
                       },
@@ -205,7 +211,8 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       ),
       style: const TextStyle(fontSize: 16),
     );

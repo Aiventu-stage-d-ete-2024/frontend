@@ -8,14 +8,15 @@ import '../pages/counter_page.dart';
 import '../widgets/main_app_bar.dart';
 import '../widgets/drawer_widget.dart';
 import '../widgets/counter_app_bar_body.dart';
-import'../models/CounterType.dart';
+import '../models/CounterType.dart';
 
 class CounterForm extends StatefulWidget {
   final bool isUpdate;
   final Map<String, dynamic>? counterDetails;
   final String? assetId;
 
-  const CounterForm({super.key, this.isUpdate = false, this.counterDetails, this.assetId});
+  const CounterForm(
+      {super.key, this.isUpdate = false, this.counterDetails, this.assetId});
 
   @override
   _CounterFormState createState() => _CounterFormState();
@@ -24,13 +25,16 @@ class CounterForm extends StatefulWidget {
 class _CounterFormState extends State<CounterForm> {
   final TextEditingController _counterIDController = TextEditingController();
   final TextEditingController _assetController = TextEditingController();
-  final TextEditingController _functionalLocationController = TextEditingController();
+  final TextEditingController _functionalLocationController =
+      TextEditingController();
   final TextEditingController _counterNameController = TextEditingController();
   final TextEditingController _counterResetController = TextEditingController();
-  final TextEditingController _registeredDateController = TextEditingController();
+  final TextEditingController _registeredDateController =
+      TextEditingController();
   final TextEditingController _valueController = TextEditingController();
   final TextEditingController _unitController = TextEditingController();
-  final TextEditingController _aggregatedValueController = TextEditingController();
+  final TextEditingController _aggregatedValueController =
+      TextEditingController();
   final TextEditingController _totalsController = TextEditingController();
 
   List assets = [];
@@ -57,13 +61,15 @@ class _CounterFormState extends State<CounterForm> {
     final details = widget.counterDetails!;
     _counterIDController.text = details['CounterID']?.toString() ?? '';
     selectedAsset = details['Asset'];
-    _functionalLocationController.text = details['FunctionalLocation']?.toString() ?? '';
+    _functionalLocationController.text =
+        details['FunctionalLocation']?.toString() ?? '';
     _counterNameController.text = details['Counter']?.toString() ?? '';
     _counterResetController.text = details['CounterReset']?.toString() ?? '';
     _registeredDateController.text = details['Registered']?.toString() ?? '';
     _valueController.text = details['Value']?.toString() ?? '';
     _unitController.text = details['Unit']?.toString() ?? '';
-    _aggregatedValueController.text = details['AggregatedValue']?.toString() ?? '';
+    _aggregatedValueController.text =
+        details['AggregatedValue']?.toString() ?? '';
     _totalsController.text = details['Totals']?.toString() ?? '';
     selectedCounterType = details['CounterType']?.toString() ?? CounterType[0];
   }
@@ -91,7 +97,8 @@ class _CounterFormState extends State<CounterForm> {
         setState(() {
           assets = data['assets'];
           for (var asset in assets) {
-            assetFunctionalLocations[asset['AssetID']] = asset['FunctionalLocation'];
+            assetFunctionalLocations[asset['AssetID']] =
+                asset['FunctionalLocation'];
           }
         });
       } else {
@@ -117,7 +124,8 @@ class _CounterFormState extends State<CounterForm> {
   }
 
   Future<void> updateCounter() async {
-    final url = Uri.parse('${baseUrl}counters/${widget.counterDetails!['_id']}');
+    final url =
+        Uri.parse('${baseUrl}counters/${widget.counterDetails!['_id']}');
     final response = await http.put(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -141,7 +149,8 @@ class _CounterFormState extends State<CounterForm> {
       'Value': double.tryParse(_valueController.text) ?? 0.0,
       'Unit': _unitController.text,
       'CounterType': selectedCounterType,
-      'AggregatedValue': double.tryParse(_aggregatedValueController.text) ?? 0.0,
+      'AggregatedValue':
+          double.tryParse(_aggregatedValueController.text) ?? 0.0,
       'Totals': double.tryParse(_totalsController.text) ?? 0.0,
     };
   }
@@ -149,7 +158,9 @@ class _CounterFormState extends State<CounterForm> {
   void _navigateToCountersPage() {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => CounterPage(assetId: selectedAsset ?? widget.assetId)),
+      MaterialPageRoute(
+          builder: (context) =>
+              CounterPage(assetId: selectedAsset ?? widget.assetId)),
       (Route route) => false,
     );
   }
@@ -193,7 +204,8 @@ class _CounterFormState extends State<CounterForm> {
       },
     );
     if (pickedDate != null) {
-      _registeredDateController.text = DateFormat('yyyy-MM-dd').format(pickedDate);
+      _registeredDateController.text =
+          DateFormat('yyyy-MM-dd').format(pickedDate);
     }
   }
 
@@ -257,26 +269,28 @@ class _CounterFormState extends State<CounterForm> {
                     decoration: InputDecoration(
                       labelText: 'Counter Type',
                       labelStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal,
-                ),
-                floatingLabelStyle: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF3665DB),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
-                ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                fillColor: Colors.white,
-                filled: true,
-              ),
-              dropdownColor: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      floatingLabelStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF3665DB),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color: Color(0xFF3665DB), width: 2.0),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
+                      fillColor: Colors.white,
+                      filled: true,
+                    ),
+                    dropdownColor: Colors.white,
                     items: CounterType.map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -316,12 +330,13 @@ class _CounterFormState extends State<CounterForm> {
                   Align(
                     alignment: Alignment.center,
                     child: ElevatedButton(
-                      onPressed: widget.isUpdate ? updateCounter : createCounter,
+                      onPressed:
+                          widget.isUpdate ? updateCounter : createCounter,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF3665DB),
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 32, vertical: 12),
                         textStyle: const TextStyle(fontSize: 18),
                       ),
                       child: const Text('Confirm'),
@@ -356,21 +371,19 @@ class CustomTextFormField extends StatelessWidget {
       readOnly: readOnly,
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: const TextStyle(
-            fontSize: 16, fontWeight: FontWeight.normal),
+        labelStyle:
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
         floatingLabelStyle: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Color(0xFF3665DB)),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
-          borderSide: const BorderSide(
-              color: Color(0xFF3665DB), width: 2.0),
+          borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
         ),
-        contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16.0, vertical: 12.0),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       ),
       style: const TextStyle(fontSize: 16),
     );

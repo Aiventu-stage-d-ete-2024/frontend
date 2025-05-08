@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:test/pages/counter_page.dart'; 
+import 'package:test/pages/counter_page.dart';
 import '../pages/Asset_form.dart';
 import '../pages/home_page.dart';
 import '../pages/asset_page.dart';
@@ -40,7 +40,9 @@ Widget assetAppBarBody(
             } else {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => const MyHomePage(title: "Finance & Operations")),
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const MyHomePage(title: "Finance & Operations")),
                 (route) => false,
               );
             }
@@ -48,7 +50,6 @@ Widget assetAppBarBody(
           icon: const Icon(Icons.arrow_back, color: Color(0xFF3665DB)),
           padding: EdgeInsets.zero,
         ),
-
         if (!isAssetDetailsPage)
           IconButton(
             onPressed: () {
@@ -61,7 +62,6 @@ Widget assetAppBarBody(
             icon: const Icon(Icons.add, color: Color(0xFF3665DB)),
             padding: EdgeInsets.zero,
           ),
-
         if (isAssetDetailsPage && assetDetails != null) ...[
           IconButton(
             onPressed: () {
@@ -89,7 +89,8 @@ Widget assetAppBarBody(
                       'Confirm Deletion',
                       style: TextStyle(color: Color(0xFF3665DB)),
                     ),
-                    content: const Text('Are you sure you want to delete this asset?'),
+                    content: const Text(
+                        'Are you sure you want to delete this asset?'),
                     backgroundColor: Colors.white,
                     actions: [
                       TextButton(
@@ -103,10 +104,11 @@ Widget assetAppBarBody(
                         onPressed: () async {
                           try {
                             await deleteAsset(assetDetails['_id']);
-                            Navigator.of(context).pop(); 
+                            Navigator.of(context).pop();
                             Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(builder: (context) => const AssetPage()),
+                              MaterialPageRoute(
+                                  builder: (context) => const AssetPage()),
                               (route) => false,
                             );
                           } catch (e) {
@@ -131,14 +133,16 @@ Widget assetAppBarBody(
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CounterPage(assetId: assetDetails['AssetID']),
+                  builder: (context) =>
+                      CounterPage(assetId: assetDetails['AssetID']),
                 ),
                 (route) => false,
               );
             },
             label: const Text(
               'Counters',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF3665DB)),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: Color(0xFF3665DB)),
             ),
             style: ButtonStyle(
               padding: WidgetStateProperty.all(EdgeInsets.zero),

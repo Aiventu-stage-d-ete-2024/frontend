@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import '../widgets/main_app_bar.dart';
 import '../widgets/drawer_widget.dart';
 import '../baseUrl.dart';
-import 'mr_details.dart'; 
+import 'mr_details.dart';
 
 class MyHomePage extends StatefulWidget {
   final String title;
@@ -57,24 +57,25 @@ class _MyHomePageState extends State<MyHomePage> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
       initialDatePickerMode: DatePickerMode.year,
-    builder: (BuildContext context, Widget? child) {
-      return Theme(
-        data: Theme.of(context).copyWith(
-          colorScheme: const ColorScheme.light(
-            primary: Color(0xFF3665DB),
-            onPrimary: Colors.white,
-            onSurface: Colors.black,
-          ),
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-              foregroundColor: const Color(0xFF3665DB),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Color(0xFF3665DB),
+              onPrimary: Colors.white,
+              onSurface: Colors.black,
             ),
-          ), dialogTheme: const DialogThemeData(backgroundColor: Colors.white),
-        ),
-        child: child!,
-      );
-    },
-  );
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: const Color(0xFF3665DB),
+              ),
+            ),
+            dialogTheme: const DialogThemeData(backgroundColor: Colors.white),
+          ),
+          child: child!,
+        );
+      },
+    );
 
     if (picked != null) {
       setState(() {
@@ -112,12 +113,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.calendar_today, color: Color(0xFF3665DB)),
+                        icon: const Icon(Icons.calendar_today,
+                            color: Color(0xFF3665DB)),
                         onPressed: () => _pickYear(context),
                         tooltip: 'Jump to Year',
                       ),
                     ],
                   ),
+
                   ///const SizedBox(height: 16.0),
                   TableCalendar(
                     firstDay: DateTime.utc(2000, 1, 1),
@@ -145,13 +148,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       titleCentered: true,
                       titleTextStyle: TextStyle(
                         color: Colors.transparent,
-                        fontSize: 0, 
+                        fontSize: 0,
                       ),
                     ),
                     calendarStyle: CalendarStyle(
                       todayDecoration: BoxDecoration(
                         color: Colors.transparent,
-                        border: Border.all(color: const Color(0xFF3665DB), width: 2.0),
+                        border: Border.all(
+                            color: const Color(0xFF3665DB), width: 2.0),
                         shape: BoxShape.circle,
                       ),
                       selectedDecoration: const BoxDecoration(
@@ -160,7 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       selectedTextStyle: const TextStyle(color: Colors.white),
                       todayTextStyle: const TextStyle(color: Color(0xFF3665DB)),
-                      weekendTextStyle: const TextStyle(color: Color(0xFF3665DB)),
+                      weekendTextStyle:
+                          const TextStyle(color: Color(0xFF3665DB)),
                       outsideTextStyle: const TextStyle(color: Colors.grey),
                       outsideDaysVisible: false,
                     ),
@@ -169,7 +174,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   const SizedBox(height: 16.0),
                   Text(
                     'Maintenance Requests on ${DateFormat('MMMM dd, yyyy').format(_selectedDay!)}',
-                    style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8.0),
                   _maintenanceRequests.isEmpty
@@ -194,14 +200,19 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Card(
                                 color: Colors.white,
                                 child: ListTile(
-                                  title: Text('Request ID: ${request['RequestID']}'),
+                                  title: Text(
+                                      'Request ID: ${request['RequestID']}'),
                                   subtitle: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text('Request Type: ${request['RequestType']}'),
+                                      Text(
+                                          'Request Type: ${request['RequestType']}'),
                                       Text('Asset: ${request['Asset']}'),
-                                      Text('Functional Location: ${request['FunctionalLocation']}'),
-                                      Text('Current Lifecycle State: ${request['CurrentLifecycleState']}'),
+                                      Text(
+                                          'Functional Location: ${request['FunctionalLocation']}'),
+                                      Text(
+                                          'Current Lifecycle State: ${request['CurrentLifecycleState']}'),
                                     ],
                                   ),
                                 ),

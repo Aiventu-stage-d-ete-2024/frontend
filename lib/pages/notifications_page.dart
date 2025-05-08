@@ -38,9 +38,30 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
   String _formatDate(String dateString) {
     final date = DateTime.parse(dateString).toLocal();
-    final days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    final months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    
+    final days = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ];
+    final months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+
     final dayOfWeek = days[date.weekday % 7];
     final dayOfMonth = date.day;
     final month = months[date.month - 1];

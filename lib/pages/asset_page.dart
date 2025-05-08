@@ -83,10 +83,12 @@ class _AssetPageState extends State<AssetPage> {
                             hintText: 'Filter',
                             prefixIcon: const Icon(Icons.search),
                             focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(color: Color(0xFF3665DB), width: 2.0),
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
+                                  color: Color(0xFF3665DB), width: 2.0),
                             ),
-                            contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 10),
                           ),
                           onChanged: (value) {
                             setState(() {

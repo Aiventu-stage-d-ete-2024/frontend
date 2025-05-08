@@ -21,9 +21,9 @@ class DrawerWidget extends StatelessWidget {
               child: Text(
                 'Menu',
                 style: TextStyle(
-                  color: Colors.white, 
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -37,14 +37,14 @@ class DrawerWidget extends StatelessWidget {
           ListTile(
             title: const Text('Assets'),
             onTap: () {
-              Navigator.pop(context); 
-              Navigator.pushReplacementNamed(context, '/assets'); 
+              Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, '/assets');
             },
           ),
           ListTile(
             title: const Text('Maintenance Requests'),
             onTap: () {
-              Navigator.pop(context); 
+              Navigator.pop(context);
               Navigator.pushReplacementNamed(context, '/maintenancerequests');
             },
           ),

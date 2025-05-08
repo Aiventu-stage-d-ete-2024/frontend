@@ -34,7 +34,8 @@ Widget counterAppBarBody(
             if (isCounterDetailsPage) {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => CounterPage(assetId: AssetID)),
+                MaterialPageRoute(
+                    builder: (context) => CounterPage(assetId: AssetID)),
                 (Route<dynamic> route) => false,
               );
             } else {
@@ -50,7 +51,6 @@ Widget counterAppBarBody(
           icon: const Icon(Icons.arrow_back, color: Color(0xFF3665DB)),
           padding: EdgeInsets.zero,
         ),
-
         if (isCounterDetailsPage && counterDetails != null)
           IconButton(
             onPressed: () {
@@ -69,20 +69,19 @@ Widget counterAppBarBody(
             icon: const Icon(Icons.edit, color: Color(0xFF3665DB)),
             padding: EdgeInsets.zero,
           ),
-
         if (!isCounterDetailsPage)
           IconButton(
             onPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => CounterForm(assetId: AssetID)),
+                MaterialPageRoute(
+                    builder: (context) => CounterForm(assetId: AssetID)),
                 (Route<dynamic> route) => false,
               );
             },
             icon: const Icon(Icons.add, color: Color(0xFF3665DB)),
             padding: EdgeInsets.zero,
           ),
-
         if (isCounterDetailsPage && counterDetails != null)
           IconButton(
             onPressed: () {
@@ -94,12 +93,14 @@ Widget counterAppBarBody(
                       'Confirm Deletion',
                       style: TextStyle(color: Color(0xFF3665DB)),
                     ),
-                    content: const Text('Are you sure you want to delete this counter?'),
+                    content: const Text(
+                        'Are you sure you want to delete this counter?'),
                     backgroundColor: Colors.white,
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.of(context).pop(),
-                        child: const Text('Cancel', style: TextStyle(color: Color(0xFF3665DB))),
+                        child: const Text('Cancel',
+                            style: TextStyle(color: Color(0xFF3665DB))),
                       ),
                       TextButton(
                         onPressed: () async {
@@ -108,17 +109,22 @@ Widget counterAppBarBody(
                             Navigator.of(context).pop();
                             Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(builder: (context) => CounterPage(assetId: AssetID)),
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      CounterPage(assetId: AssetID)),
                               (Route<dynamic> route) => false,
                             );
                           } catch (e) {
                             print('Error deleting counter: $e');
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Failed to delete counter: $e')),
+                              SnackBar(
+                                  content:
+                                      Text('Failed to delete counter: $e')),
                             );
                           }
                         },
-                        child: const Text('Delete', style: TextStyle(color: Color(0xFF3665DB))),
+                        child: const Text('Delete',
+                            style: TextStyle(color: Color(0xFF3665DB))),
                       ),
                     ],
                   );

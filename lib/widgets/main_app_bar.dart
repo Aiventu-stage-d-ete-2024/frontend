@@ -22,18 +22,17 @@ class _MainAppBarState extends State<MainAppBar> {
     _loadUnreadCount();
 
     SocketService.onNewNotification((notification) async {
-  //print("🔔 MainAppBar received notification: $notification");
+      //print("🔔 MainAppBar received notification: $notification");
 
-  if (mounted) {
-    setState(() {
-      _unreadCount++;
+      if (mounted) {
+        setState(() {
+          _unreadCount++;
+        });
+      }
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setInt('unreadCount', _unreadCount);
     });
-  }
-
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setInt('unreadCount', _unreadCount);
-});
-
   }
 
   Future<void> _loadUnreadCount() async {
@@ -44,13 +43,12 @@ class _MainAppBarState extends State<MainAppBar> {
   }
 
   Future<void> _resetUnreadCount() async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setInt('unreadCount', 0);
-  setState(() {
-    _unreadCount = 0;
-  });
-}
-
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('unreadCount', 0);
+    setState(() {
+      _unreadCount = 0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,14 +59,17 @@ class _MainAppBarState extends State<MainAppBar> {
         onTap: () => Scaffold.of(context).openDrawer(),
         child: const Text(
           'Finance & Operations',
-          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
       iconTheme: const IconThemeData(color: Colors.white),
       actions: [
         TextButton(
           onPressed: () {},
-          child: const Text('USMF', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          child: const Text('USMF',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         ),
         Container(
           margin: const EdgeInsets.only(right: 8),
@@ -77,26 +78,28 @@ class _MainAppBarState extends State<MainAppBar> {
             children: [
               IconButton(
                 onPressed: () async {
-  _resetUnreadCount(); 
-  await Navigator.push(
-    context,
-    MaterialPageRoute(builder: (_) => const NotificationsPage()),
-  );
-},
-
+                  _resetUnreadCount();
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const NotificationsPage()),
+                  );
+                },
                 icon: const Icon(Icons.notifications, color: Colors.white),
               ),
               if (_unreadCount > 0)
                 Positioned(
                   top: 8,
-                  right: -2, 
+                  right: -2,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
                     decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                    constraints:
+                        const BoxConstraints(minWidth: 16, minHeight: 16),
                     child: Text(
                       '$_unreadCount',
                       style: const TextStyle(

@@ -11,7 +11,8 @@ class CounterDetailsPage extends StatefulWidget {
   final String CounterID;
   final String AssetID;
 
-  const CounterDetailsPage({super.key, required this.CounterID, required this.AssetID});
+  const CounterDetailsPage(
+      {super.key, required this.CounterID, required this.AssetID});
 
   @override
   _CounterDetailsPageState createState() => _CounterDetailsPageState();
@@ -57,7 +58,10 @@ class _CounterDetailsPageState extends State<CounterDetailsPage> {
               ? const Center(child: Text('Counter details not found'))
               : Column(
                   children: [
-                    counterAppBarBody(context, isCounterDetailsPage: true, counterDetails: _counterDetails!, AssetID: widget.AssetID),
+                    counterAppBarBody(context,
+                        isCounterDetailsPage: true,
+                        counterDetails: _counterDetails!,
+                        AssetID: widget.AssetID),
                     Expanded(
                       child: ListView(
                         padding: const EdgeInsets.all(16),
@@ -74,16 +78,30 @@ class _CounterDetailsPageState extends State<CounterDetailsPage> {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          _buildDetailCard(Icons.confirmation_number, 'Counter ID', _counterDetails!['CounterID']),
-                          _buildDetailCard(Icons.inventory_2, 'Asset', _counterDetails!['AssetName']),
-                          _buildDetailCard(Icons.location_on, 'Functional Location', _counterDetails!['FunctionalLocation']),
-                          _buildDetailCard(Icons.countertops, 'Counter Name', _counterDetails!['Counter']),
-                          _buildDetailCard(Icons.restart_alt, 'Counter Reset', _counterDetails!['CounterReset']),
-                          _buildDetailCard(Icons.date_range, 'Registered Date', _counterDetails!['Registered']),
-                          _buildDetailCard(Icons.numbers, 'Value', _counterDetails!['Value']),
-                          _buildDetailCard(Icons.straighten, 'Unit', _counterDetails!['Unit']),
-                          _buildDetailCard(Icons.stacked_line_chart, 'Aggregated Value', _counterDetails!['AggregatedValue']),
-                          _buildDetailCard(Icons.calculate, 'Totals', _counterDetails!['Totals']),
+                          _buildDetailCard(Icons.confirmation_number,
+                              'Counter ID', _counterDetails!['CounterID']),
+                          _buildDetailCard(Icons.inventory_2, 'Asset',
+                              _counterDetails!['AssetName']),
+                          _buildDetailCard(
+                              Icons.location_on,
+                              'Functional Location',
+                              _counterDetails!['FunctionalLocation']),
+                          _buildDetailCard(Icons.countertops, 'Counter Name',
+                              _counterDetails!['Counter']),
+                          _buildDetailCard(Icons.restart_alt, 'Counter Reset',
+                              _counterDetails!['CounterReset']),
+                          _buildDetailCard(Icons.date_range, 'Registered Date',
+                              _counterDetails!['Registered']),
+                          _buildDetailCard(Icons.numbers, 'Value',
+                              _counterDetails!['Value']),
+                          _buildDetailCard(Icons.straighten, 'Unit',
+                              _counterDetails!['Unit']),
+                          _buildDetailCard(
+                              Icons.stacked_line_chart,
+                              'Aggregated Value',
+                              _counterDetails!['AggregatedValue']),
+                          _buildDetailCard(Icons.calculate, 'Totals',
+                              _counterDetails!['Totals']),
                           const SizedBox(height: 24),
                         ],
                       ),
@@ -94,7 +112,9 @@ class _CounterDetailsPageState extends State<CounterDetailsPage> {
   }
 
   Widget _buildDetailCard(IconData icon, String title, dynamic value) {
-    String displayValue = value == null || value.toString().isEmpty ? '------------' : value.toString();
+    String displayValue = value == null || value.toString().isEmpty
+        ? '------------'
+        : value.toString();
 
     return Card(
       color: Colors.grey[50],

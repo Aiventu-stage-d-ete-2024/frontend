@@ -74,6 +74,8 @@ class _CounterPageState extends State<CounterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: const MainAppBar(),
       drawer: const DrawerWidget(),
@@ -85,45 +87,67 @@ class _CounterPageState extends State<CounterPage> {
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                      counterAppBarBody(context,
-                          isCounterDetailsPage: false, AssetID: widget.assetId!),
+                      counterAppBarBody(
+                        context,
+                        isCounterDetailsPage: false,
+                        AssetID: widget.assetId!,
+                      ),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(0),
+                        //padding: const EdgeInsets.all(16.0),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Counters for Asset ${widget.assetId}',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            const SizedBox(height: 16.0),
+                            Center(
+                              child: Text(
+                                'Counters for Asset ${widget.assetId}',
+                                style: const TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF3665DB),
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                             const SizedBox(height: 16.0),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 200,
-                                  height: 30,
-                                  child: TextField(
-                                    controller: _searchController,
-                                    textAlignVertical: TextAlignVertical.center,
-                                    decoration: InputDecoration(
-                                      border: const OutlineInputBorder(),
-                                      hintText: 'Filter',
-                                      prefixIcon: const Icon(Icons.search),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10.0),
-                                        borderSide: const BorderSide(
-                                            color: Color(0xFF3665DB), width: 2.0),
-                                      ),
-                                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                width: screenWidth,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      blurRadius: 4,
+                                      offset: Offset(0, 2),
                                     ),
+                                  ],
+                                ),
+                                child: TextField(
+                                  controller: _searchController,
+                                  style: const TextStyle(fontSize: 14),
+                                  decoration: InputDecoration(
+                                    hintText: 'Search counters...',
+                                    prefixIcon: const Icon(Icons.search,
+                                        color: Color(0xFF3665DB)),
+                                    border: InputBorder.none,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 12),
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
                             const SizedBox(height: 16.0),
-                            CountersTable(
-                                counters: _counters, AssetID: widget.assetId!),
+                            SizedBox(
+                              width: screenWidth,
+                              child: CountersTable(
+                                counters: _counters,
+                                AssetID: widget.assetId!,
+                              ),
+                            ),
                           ],
                         ),
                       ),

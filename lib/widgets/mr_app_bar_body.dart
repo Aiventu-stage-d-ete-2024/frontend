@@ -18,7 +18,8 @@ Future<void> deleteRequest(String requestId) async {
   }
 }
 
-Widget mrAppBarBody(BuildContext context, {
+Widget mrAppBarBody(
+  BuildContext context, {
   required bool isMRDetailsPage,
   Map<String, dynamic>? mrDetails,
 }) {
@@ -32,13 +33,16 @@ Widget mrAppBarBody(BuildContext context, {
             if (isMRDetailsPage) {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => const MaintenancePage()),
+                MaterialPageRoute(
+                    builder: (context) => const MaintenancePage()),
                 (Route<dynamic> route) => false,
               );
             } else {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => const MyHomePage(title: "Finance & Operations")),
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const MyHomePage(title: "Finance & Operations")),
                 (Route<dynamic> route) => false,
               );
             }
@@ -46,7 +50,6 @@ Widget mrAppBarBody(BuildContext context, {
           icon: const Icon(Icons.arrow_back, color: Color(0xFF3665DB)),
           padding: EdgeInsets.zero,
         ),
-
         if (isMRDetailsPage && mrDetails != null) ...[
           IconButton(
             onPressed: () {
@@ -74,14 +77,16 @@ Widget mrAppBarBody(BuildContext context, {
                       'Confirm Deletion',
                       style: TextStyle(color: Color(0xFF3665DB)),
                     ),
-                    content: const Text('Are you sure you want to delete this maintenance request?'),
+                    content: const Text(
+                        'Are you sure you want to delete this maintenance request?'),
                     backgroundColor: Colors.white,
                     actions: [
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: const Text('Cancel', style: TextStyle(color: Color(0xFF3665DB))),
+                        child: const Text('Cancel',
+                            style: TextStyle(color: Color(0xFF3665DB))),
                       ),
                       TextButton(
                         onPressed: () async {
@@ -90,14 +95,17 @@ Widget mrAppBarBody(BuildContext context, {
                             Navigator.of(context).pop();
                             Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(builder: (context) => const MaintenancePage()),
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const MaintenancePage()),
                               (Route<dynamic> route) => false,
                             );
                           } catch (e) {
                             print('Error deleting request: $e');
                           }
                         },
-                        child: const Text('Delete', style: TextStyle(color: Color(0xFF3665DB))),
+                        child: const Text('Delete',
+                            style: TextStyle(color: Color(0xFF3665DB))),
                       ),
                     ],
                   );
@@ -108,7 +116,6 @@ Widget mrAppBarBody(BuildContext context, {
             padding: EdgeInsets.zero,
           ),
         ],
-
         if (!isMRDetailsPage)
           IconButton(
             onPressed: () {

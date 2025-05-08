@@ -56,7 +56,8 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
               ? const Center(child: Text('Asset details not found'))
               : Column(
                   children: [
-                    assetAppBarBody(context, isAssetDetailsPage: true, assetDetails: _assetDetails),
+                    assetAppBarBody(context,
+                        isAssetDetailsPage: true, assetDetails: _assetDetails),
                     Expanded(
                       child: ListView(
                         padding: const EdgeInsets.all(16),
@@ -73,17 +74,34 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          _buildDetailCard(Icons.confirmation_number, 'Asset ID', _assetDetails!['AssetID']),
-                          _buildDetailCard(Icons.inventory_2, 'Name', _assetDetails!['Name']),
-                          _buildDetailCard(Icons.account_tree, 'Parent', _assetDetails!['Parent']),
-                          _buildDetailCard(Icons.supervisor_account, 'Children', _assetDetails!['NumberOfChildren']),
-                          _buildDetailCard(Icons.category, 'Asset Type', _assetDetails!['AssetType']),
-                          _buildDetailCard(Icons.precision_manufacturing, 'Manufacturer', _assetDetails!['Manufacturer']),
-                          _buildDetailCard(Icons.devices_other, 'Model', _assetDetails!['Model']),
-                          _buildDetailCard(Icons.account_box, 'Customer Account', _assetDetails!['CustomerAccount']),
-                          _buildDetailCard(Icons.report_problem, 'Criticality', _assetDetails!['Criticality']),
-                          _buildDetailCard(Icons.location_on, 'Functional Location', _assetDetails!['FunctionalLocation']),
-                          _buildDetailCard(Icons.timeline, 'Current Lifecycle State', _assetDetails!['CurrentLifecycleState']),
+                          _buildDetailCard(Icons.confirmation_number,
+                              'Asset ID', _assetDetails!['AssetID']),
+                          _buildDetailCard(Icons.inventory_2, 'Name',
+                              _assetDetails!['Name']),
+                          _buildDetailCard(Icons.account_tree, 'Parent',
+                              _assetDetails!['Parent']),
+                          _buildDetailCard(Icons.supervisor_account, 'Children',
+                              _assetDetails!['NumberOfChildren']),
+                          _buildDetailCard(Icons.category, 'Asset Type',
+                              _assetDetails!['AssetType']),
+                          _buildDetailCard(Icons.precision_manufacturing,
+                              'Manufacturer', _assetDetails!['Manufacturer']),
+                          _buildDetailCard(Icons.devices_other, 'Model',
+                              _assetDetails!['Model']),
+                          _buildDetailCard(
+                              Icons.account_box,
+                              'Customer Account',
+                              _assetDetails!['CustomerAccount']),
+                          _buildDetailCard(Icons.report_problem, 'Criticality',
+                              _assetDetails!['Criticality']),
+                          _buildDetailCard(
+                              Icons.location_on,
+                              'Functional Location',
+                              _assetDetails!['FunctionalLocation']),
+                          _buildDetailCard(
+                              Icons.timeline,
+                              'Current Lifecycle State',
+                              _assetDetails!['CurrentLifecycleState']),
                           const SizedBox(height: 24),
                         ],
                       ),
@@ -94,7 +112,9 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
   }
 
   Widget _buildDetailCard(IconData icon, String title, dynamic value) {
-    String displayValue = value == null || value.toString().isEmpty ? '------------' : value.toString();
+    String displayValue = value == null || value.toString().isEmpty
+        ? '------------'
+        : value.toString();
 
     return Card(
       color: Colors.grey[50],

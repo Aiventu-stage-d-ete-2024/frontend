@@ -29,15 +29,18 @@ class MaintenanceRequestsTable extends StatelessWidget {
           return DataRow(
             cells: [
               DataCell(GestureDetector(
-                onTap: () => _navigateToMRDetails(context, request['RequestID']),
-                child: Text(request['RequestID']?.toString()?? ''),
+                onTap: () =>
+                    _navigateToMRDetails(context, request['RequestID']),
+                child: Text(request['RequestID']?.toString() ?? ''),
               )),
               DataCell(GestureDetector(
-                onTap: () => _navigateToMRDetails(context, request['RequestID']),
-                child: Text(request['RequestType']?.toString()?? ''),
+                onTap: () =>
+                    _navigateToMRDetails(context, request['RequestID']),
+                child: Text(request['RequestType']?.toString() ?? ''),
               )),
               DataCell(GestureDetector(
-                onTap: () => _navigateToMRDetails(context, request['RequestID']),
+                onTap: () =>
+                    _navigateToMRDetails(context, request['RequestID']),
                 child: Text(request['Asset']?.toString() ?? ''),
               )),
               /* DataCell(GestureDetector(
