@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'dart:convert';
+
 import '../widgets/main_app_bar.dart';
 import '../baseUrl.dart';
 import '../widgets/drawer_widget.dart';
@@ -52,130 +53,107 @@ class _MRDetailsPageState extends State<MRDetailsPage> {
       backgroundColor: Colors.white,
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                mrAppBarBody(context,isMRDetailsPage: true, mrDetails: _mrDetails),
-                Expanded(
-                  child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 16),
-                          const Center(
-                            child: Text(
-                              'Maintenance Request Details',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF3665DB),
+          : _mrDetails == null
+              ? const Center(child: Text('Maintenance request details not found'))
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    mrAppBarBody(context, isMRDetailsPage: true, mrDetails: _mrDetails),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 16),
+                            const Center(
+                              child: Text(
+                                'Maintenance Request Details',
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF3665DB),
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 16),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                          _buildDetailRow('Request ID', _mrDetails!['RequestID']),
-                          _buildDetailRow('Request Type', _mrDetails!['RequestType']),
-                          _buildDetailRow('Description', _mrDetails!['Description']),
-                          _buildDetailRow('Service Level', _mrDetails!['ServiceLevel']),
-                          _buildDetailRow('Functional Location', _mrDetails!['FunctionalLocation']),
-                          _buildDetailRow('Asset', _mrDetails!['Asset']),
-                          _buildDetailRow('Asset Verified', _mrDetails!['AssetVerified']),
-                          _buildDetailRow('Maintenance Job Type', _mrDetails!['JobType']),
-                          _buildDetailRow('Maintenance Job Type Variant', _mrDetails!['JobVariant']),
-                          _buildDetailRow('Trade', _mrDetails!['JobTrade']),
-                          _buildDetailRow('Actual Start', _formatActualStart(_mrDetails!['ActualStart'])),
-                          _buildDetailRow('Started By', _mrDetails!['StartedByWorker']),
-                          _buildDetailRow('Responsible Group', _mrDetails!['ResponsibleWorkerGroup']),
-                          _buildDetailRow('Responsible', _mrDetails!['ResponsibleWorker']),
-                          _buildDetailRow('Work Order', _mrDetails!['WorkOrder']),
-                          _buildDetailRow('Current Lifecycle State', _mrDetails!['CurrentLifecycleState']),
-                          _buildDetailRow('Number Of Faults', _mrDetails!['NumberOfFaults']),
-                        ],
+                            const SizedBox(height: 16),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _buildDetailCard(Icons.confirmation_number, 'Request ID', _mrDetails!['RequestID']),
+                                  _buildDetailCard(Icons.category, 'Request Type', _mrDetails!['RequestType']),
+                                  _buildDetailCard(Icons.description, 'Description', _mrDetails!['Description']),
+                                  _buildDetailCard(Icons.assessment, 'Service Level', _mrDetails!['ServiceLevel']),
+                                  _buildDetailCard(Icons.location_on, 'Functional Location', _mrDetails!['FunctionalLocation']),
+                                  _buildDetailCard(Icons.precision_manufacturing, 'Asset', _mrDetails!['Asset']),
+                                  //_buildDetailCard(Icons.verified, 'Asset Verified', _formatAssetVerified(_mrDetails!['AssetVerified'])),
+                                  _buildDetailCard(Icons.build, 'Maintenance Job Type', _mrDetails!['JobType']),
+                                  _buildDetailCard(Icons.settings_applications, 'Maintenance Job Type Variant', _mrDetails!['JobVariant']),
+                                  _buildDetailCard(Icons.handyman, 'Trade', _mrDetails!['JobTrade']),
+                                  _buildDetailCard(Icons.timer, 'Actual Start', _mrDetails!['ActualStart']),
+                                  _buildDetailCard(Icons.person, 'Started By', _mrDetails!['StartedByWorker']),
+                                  _buildDetailCard(Icons.group, 'Responsible Group', _mrDetails!['ResponsibleWorkerGroup']),
+                                  _buildDetailCard(Icons.person_pin, 'Responsible Worker', _mrDetails!['ResponsibleWorker']),
+                                  _buildDetailCard(Icons.work, 'Work Order', _mrDetails!['WorkOrder']),
+                                  _buildDetailCard(Icons.timeline, 'Current Lifecycle State', _mrDetails!['CurrentLifecycleState']),
+                                  _buildDetailCard(Icons.warning, 'Number Of Faults', _mrDetails!['NumberOfFaults']),
+                                  const SizedBox(height: 24),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    ],
-                  ),
+                  ],
                 ),
-                ),
-              ],
-            ),
     );
   }
 
-  Widget _buildDetailRow(String label, dynamic value) {
-    if (value == null || value.toString().isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              label,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 4),
-            const Text(
-              '------------',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black87,
-              ),
-            ),
-          ],
+  Widget _buildDetailCard(IconData icon, String title, dynamic value) {
+    String displayValue = value == null || value.toString().isEmpty ? '------------' : value.toString();
+
+    return Card(
+      color: Colors.grey[50],
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      elevation: 2,
+      child: ListTile(
+        leading: Icon(icon, color: const Color(0xFF3665DB)),
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+            color: Colors.black54,
+          ),
         ),
-      );
-    }
-
-    String displayValue = value.toString();
-
-    if (label == 'Asset Verified') {
-      displayValue = value ? '✔' : '❌';
-    }
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
+        subtitle: Text(
+          displayValue,
+          style: const TextStyle(
+            fontSize: 16,
+            color: Colors.black87,
           ),
-          const SizedBox(height: 4),
-          Text(
-            displayValue,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.black87,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  String _formatActualStart(dynamic value) {
-    if (value == null || value.toString().isEmpty) {
-      return '------------';
-    }
-    try {
-      DateTime dateTime = DateTime.parse(value);
-      String formattedDateTime = DateFormat('M/d/yyyy h:mm:ss a').format(dateTime.toLocal());
-      return formattedDateTime;
-    } catch (e) {
-      return '------------';
-    }
+  /* String _formatAssetVerified(dynamic value) {
+    if (value == null || value.toString().isEmpty) return '------------';
+    final str = value.toString().toLowerCase().trim();
+    return (str == 'yes' || str == 'true') ? '✔' : '❌';
+  } */
+
+  /* String _formatActualStart(dynamic value) {
+  // If the value is null or empty, return the placeholder
+  if (value == null || value.toString().trim().isEmpty) {
+    return '------------';
   }
+  
+  // Return the formatted date string directly
+  return value.toString();
+} */
+
+
 }
