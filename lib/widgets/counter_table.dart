@@ -33,8 +33,8 @@ class CountersTable extends StatelessWidget {
         rows: counters.map<DataRow>((counter) {
           final counterID = counter['_id'];
           final AssetID = counter['Asset'];
-          print('Counter ID: $counterID');
-          print('Asset ID: $AssetID');
+          //print('Counter ID: $counterID');
+          //print('Asset ID: $AssetID');
           return DataRow(
             cells: [
               //DataCell(Text(counter['CounterID']?.toString() ?? ''), onTap: () => _navigateToCounterDetails(context, counterID, AssetID)),
