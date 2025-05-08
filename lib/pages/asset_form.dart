@@ -185,7 +185,7 @@ class _AssetFormState extends State<AssetForm> {
                       functionalLocationController: _functionalLocationController,
                       currentLifecycleStateController: _currentLifecycleStateController,
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20.0),
                     Center(
                       child: ElevatedButton(
                         onPressed: _submitForm,
@@ -193,10 +193,7 @@ class _AssetFormState extends State<AssetForm> {
                           backgroundColor: Colors.white,
                           foregroundColor: const Color(0xFF3665DB),
                           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                          textStyle: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          textStyle: const TextStyle(fontSize: 18),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
