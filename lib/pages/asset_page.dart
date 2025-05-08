@@ -18,11 +18,19 @@ class _AssetPageState extends State<AssetPage> {
   List<dynamic> _assets = [];
   bool _isLoading = true;
   String _searchQuery = '';
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _searchAssets('');
+    _searchController.addListener(() {
+      setState(() {
+        _searchQuery = _searchController.text;
+        _isLoading = true;
+      });
+      _searchAssets(_searchQuery);
+    });
   }
 
   Future<void> _searchAssets(String query) async {
@@ -47,12 +55,14 @@ class _AssetPageState extends State<AssetPage> {
       setState(() {
         _isLoading = false;
       });
-      print('Search error: $e');
+      debugPrint('Search error: $e');
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: const MainAppBar(),
       drawer: const DrawerWidget(),
@@ -62,49 +72,61 @@ class _AssetPageState extends State<AssetPage> {
           children: [
             assetAppBarBody(context, isAssetDetailsPage: false),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'All assets',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  const SizedBox(height: 16.0),
+                  const Center(
+                    child: Text(
+                      'All Assets',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Color(0xFF3665DB),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 16.0),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 200,
-                        height: 30,
-                        child: TextField(
-                          textAlignVertical: TextAlignVertical.center,
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            hintText: 'Filter',
-                            prefixIcon: const Icon(Icons.search),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: const BorderSide(
-                                  color: Color(0xFF3665DB), width: 2.0),
-                            ),
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 10),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: screenWidth,
+                      height: 45,
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
                           ),
-                          onChanged: (value) {
-                            setState(() {
-                              _isLoading = true;
-                              _searchQuery = value;
-                            });
-                            _searchAssets(value);
-                          },
+                        ],
+                      ),
+                      child: TextField(
+                        controller: _searchController,
+                        style: const TextStyle(fontSize: 14),
+                        decoration: const InputDecoration(
+                          hintText: 'Search for assets...',
+                          prefixIcon:
+                              Icon(Icons.search, color: Color(0xFF3665DB)),
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(vertical: 12),
                         ),
                       ),
-                    ],
+                    ),
                   ),
                   const SizedBox(height: 16.0),
-                  AssetTable(
-                    assets: _assets,
-                    isLoading: _isLoading,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: SizedBox(
+                      width: screenWidth,
+                      child: AssetTable(
+                        assets: _assets,
+                        isLoading: _isLoading,
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -93,7 +93,7 @@ class _CounterPageState extends State<CounterPage> {
                         AssetID: widget.assetId!,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(0),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         //padding: const EdgeInsets.all(16.0),
                         child: Column(
                           children: [
@@ -130,7 +130,7 @@ class _CounterPageState extends State<CounterPage> {
                                   controller: _searchController,
                                   style: const TextStyle(fontSize: 14),
                                   decoration: InputDecoration(
-                                    hintText: 'Search counters...',
+                                    hintText: 'Search for counters...',
                                     prefixIcon: const Icon(Icons.search,
                                         color: Color(0xFF3665DB)),
                                     border: InputBorder.none,
@@ -141,11 +141,15 @@ class _CounterPageState extends State<CounterPage> {
                               ),
                             ),
                             const SizedBox(height: 16.0),
-                            SizedBox(
-                              width: screenWidth,
-                              child: CountersTable(
-                                counters: _counters,
-                                AssetID: widget.assetId!,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: SizedBox(
+                                width: screenWidth,
+                                child: CountersTable(
+                                  counters: _counters,
+                                  AssetID: widget.assetId!,
+                                ),
                               ),
                             ),
                           ],

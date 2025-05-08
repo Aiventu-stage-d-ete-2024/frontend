@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -68,6 +67,8 @@ class _MaintenancePageState extends State<MaintenancePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: const MainAppBar(),
       drawer: const DrawerWidget(),
@@ -77,43 +78,61 @@ class _MaintenancePageState extends State<MaintenancePage> {
           children: [
             mrAppBarBody(context, isMRDetailsPage: false),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'All maintenance requests',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  const SizedBox(height: 16.0),
+                  const Center(
+                    child: Text(
+                      'All Maintenance Requests',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Color(0xFF3665DB),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 16.0),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 200,
-                        height: 30,
-                        child: TextField(
-                          controller: _searchController,
-                          textAlignVertical: TextAlignVertical.center,
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            hintText: 'Filter',
-                            prefixIcon: const Icon(Icons.search),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: const BorderSide(
-                                  color: Color(0xFF3665DB), width: 2.0),
-                            ),
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 10),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: screenWidth,
+                      height: 45,
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
                           ),
+                        ],
+                      ),
+                      child: TextField(
+                        controller: _searchController,
+                        style: const TextStyle(fontSize: 14),
+                        decoration: const InputDecoration(
+                          hintText: 'Search for maintenance requests...',
+                          prefixIcon:
+                              Icon(Icons.search, color: Color(0xFF3665DB)),
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(vertical: 12),
                         ),
                       ),
-                    ],
+                    ),
                   ),
                   const SizedBox(height: 16.0),
-                  MaintenanceRequestsTable(
-                    maintenanceRequests: _maintenanceRequests,
-                    isLoading: _isLoading,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: SizedBox(
+                      width: screenWidth,
+                      child: MaintenanceRequestsTable(
+                        maintenanceRequests: _maintenanceRequests,
+                        isLoading: _isLoading,
+                      ),
+                    ),
                   ),
                 ],
               ),
