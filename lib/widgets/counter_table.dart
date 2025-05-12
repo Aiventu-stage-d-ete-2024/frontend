@@ -18,6 +18,7 @@ class CountersTable extends StatelessWidget {
 
     return SingleChildScrollView(
       child: DataTable(
+        columnSpacing: 20,
         columns: const [
           //DataColumn(label: Text('Counter ID')),
           DataColumn(label: Text('Asset')),

@@ -142,8 +142,7 @@ class _CounterPageState extends State<CounterPage> {
                             ),
                             const SizedBox(height: 16.0),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              padding:const EdgeInsets.symmetric(horizontal: 5.0),
                               child: SizedBox(
                                 width: screenWidth,
                                 child: CountersTable(
