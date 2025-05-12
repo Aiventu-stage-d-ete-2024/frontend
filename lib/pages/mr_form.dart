@@ -43,6 +43,7 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
 
   List<dynamic> assets = [];
   String? selectedAsset;
+  Map<String, String> assetFunctionalLocations = {};
 
   @override
   void initState() {
@@ -105,6 +106,10 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
         final data = json.decode(response.body);
         setState(() {
           assets = data['assets'];
+          for (var asset in assets) {
+            assetFunctionalLocations[asset['AssetID']] =
+                asset['FunctionalLocation'];
+          }
         });
       } else {
         throw Exception('Failed to load assets');
@@ -289,10 +294,6 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
                       labelText: 'Service Level',
                       controller: _serviceLevelController),
                   const SizedBox(height: 20.0),
-                  CustomTextFormField(
-                      labelText: 'Functional Location',
-                      controller: _functionalLocationController),
-                  const SizedBox(height: 20.0),
                   DropdownButtonFormField<String>(
                     value: selectedAsset,
                     decoration: InputDecoration(
@@ -325,11 +326,16 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
                       setState(() {
                         selectedAsset = value;
                         print('Selected Asset: $selectedAsset');
+                        _functionalLocationController.text = assetFunctionalLocations[value] ?? '';
                       });
                     },
                     dropdownColor: Colors.white,
                     isExpanded: true,
                   ),
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(
+                      labelText: 'Functional Location',
+                      controller: _functionalLocationController),
                   const SizedBox(height: 20.0),
                   CustomTextFormField(
                       labelText: 'Maintenance Job Type',
