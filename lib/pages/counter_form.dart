@@ -53,7 +53,7 @@ class _CounterFormState extends State<CounterForm> {
       selectedAsset = widget.assetId;
     }
 
-    selectedCounterType = CounterType[0]; 
+    selectedCounterType = CounterType[0];
   }
 
   void _populateFields() {

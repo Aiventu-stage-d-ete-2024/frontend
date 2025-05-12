@@ -326,7 +326,8 @@ class _MaintenanceRequestFormState extends State<MaintenanceRequestForm> {
                       setState(() {
                         selectedAsset = value;
                         print('Selected Asset: $selectedAsset');
-                        _functionalLocationController.text = assetFunctionalLocations[value] ?? '';
+                        _functionalLocationController.text =
+                            assetFunctionalLocations[value] ?? '';
                       });
                     },
                     dropdownColor: Colors.white,
