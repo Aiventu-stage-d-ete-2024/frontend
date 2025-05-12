@@ -125,15 +125,15 @@ class _MaintenancePageState extends State<MaintenancePage> {
                   ),
                   const SizedBox(height: 16.0),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: SizedBox(
-                      width: screenWidth,
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
                       child: MaintenanceRequestsTable(
                         maintenanceRequests: _maintenanceRequests,
                         isLoading: _isLoading,
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

@@ -19,6 +19,7 @@ class MaintenanceRequestsTable extends StatelessWidget {
 
     return SingleChildScrollView(
       child: DataTable(
+        columnSpacing: 20,
         columns: const [
           DataColumn(label: Text('Request ID')),
           DataColumn(label: Text('Request Type')),
