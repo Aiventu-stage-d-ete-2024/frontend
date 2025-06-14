@@ -1,0 +1,2 @@
+/Users/mac/Desktop/Dynamics/frontend/android/app/.cxx/Debug/18i72195/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/mac/Desktop/Dynamics/frontend/android/app/.cxx/Debug/18i72195/arm64-v8a/CMakeFiles/rebuild_cache.dir

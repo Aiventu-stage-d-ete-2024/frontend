@@ -1,0 +1,1 @@
+/Users/mac/Desktop/Dynamics/frontend/build/app/intermediates/cxx/Debug/18i72195/obj/arm64-v8a
